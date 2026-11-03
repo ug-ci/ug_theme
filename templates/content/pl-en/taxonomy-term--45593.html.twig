@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ EN: SZKOŁY DOKTORSKIE - MFI EN - KONTAKT
+ PL: SD Historia - zasady rekrutacji
+ * @see template_preprocess_taxonomy_term()
+ *
+ * Kopia z:
+ - bootstrap_barrio/templates/content/taxonomy-term.html.twig
+ - ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig
+ *
+ */
+#}
+{% set classes = [
+    'taxonomy-term',
+    'vocabulary-' ~ term.bundle|clean_class,
+] %}
+{% extends "@ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig" %}
+
+{% block blockbefore %}
+        <!-- EEE lang: {{ language }} -->
+    {% if language == 'en' %}
+        {# wersja en:  Szkoła doktorska - EN MFI - kontakt #}
+        {{ include('@ug_theme/includes/sd_details.html.twig',  {nid: '107342', mode: 'kontakt'}  ) }}
+    {% elseif language == 'pl' %}
+        {# SD Historia - zasady rekrutacji #}
+        {{ drupal_entity('node', '123695', 'szkoly_doktorskie_zasady_rekrutacji') }}
+    {% endif %}
+{% endblock %}
+

@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ SZKOŁY DOKTORSKIE - Historia EN - KONTAKT
+ * @see template_preprocess_taxonomy_term()
+ *
+ * Kopia z:
+ - bootstrap_barrio/templates/content/taxonomy-term.html.twig
+ - ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig
+ *
+ */
+#}
+{%
+    set classes = [
+    'taxonomy-term',
+    'vocabulary-' ~ term.bundle|clean_class,
+]
+%}
+{% extends "@ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig" %}
+
+{# wersja en:  Szkoła doktorska - EN Historia - kontakt #}
+{% if language == 'en' %}
+    {% block blockbefore %}
+        {{ include('@ug_theme/includes/sd_details.html.twig',  {nid: '107341', mode: 'kontakt'}  ) }}
+    {% endblock %}
+{% endif %}
+

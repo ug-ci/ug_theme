@@ -1,0 +1,65 @@
+{#
+
+#}
+{#{% macro blok_aktualnosci(tid, hide_title = true, title = '' ) %}#}
+{#  {% if not(hide_title)  %}#}
+{#    <h2>{{  title | default("Aktualności") | t }}</h2>#}
+{#  {%  endif %}#}
+
+{% macro blok_aktualnosci(tid, show_title = 0, title = 'Aktualności' ) %}
+  {% if show_title %}
+    <h2>{{ title | t }}</h2>
+  {% endif %}
+  {{ drupal_view('aktualnosci', 'block_aktualnosci',  tid ) }}
+{% endmacro blok_aktualnosci %}
+
+
+{#  {% if not(hide_title)  %}#}
+
+{#    <h2>{{  title | default("Archiwum aktualności") | t }}</h2>#}
+{#  {%  endif %}#}
+
+{% macro blok_archiwum(tid, show_title = 0, title = 'Archiwum aktualności' ) %}
+  {% if show_title %}
+    <h2>{{ title | t }}</h2>
+  {% endif %}
+  {{ drupal_view('aktualnosci', 'block_archiwum',  tid ) }}
+  {{  tid  }}
+{% endmacro blok_archiwum %}
+
+
+
+
+{% macro blok_komunikaty(tid, show_title = 0, title = 'Komunikaty' ) %}
+  {% if show_title %}
+    <h2>{{ title | t }}</h2>
+  {% endif %}
+  {{ drupal_view('komunikaty', 'blok_komunikaty', tid) }}
+{% endmacro blok_komunikaty %}
+
+
+{% macro blok_komunikaty_archiwum(tid, show_title = 0, title = 'Komunikaty' ) %}
+  {% if show_title %}
+    <h2>{{ title | t }}</h2>
+  {% endif %}
+  {{ drupal_view('komunikaty', 'blok_komunikaty_archiwum', tid) }}
+{% endmacro blok_komunikaty_archiwum %}
+
+
+
+{# Wykorzystywane w: akademiki-budynek #}
+
+{% macro icon_with_address(icon, field_value, list=0) %}
+  <div class="d-flex align-items-center mt-1 mb-4">
+    <div class="material-icons p-2 fs-3 text-primary align-items-center">{{ icon }}</div>
+    <div class="card-text py-2 px-3">
+      {% if list==0 %}
+        {{ field_value }}
+      {% else %}
+        {% for item in field_value %}
+          <div>{{ item.value }}</div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+{% endmacro icon_with_address %}

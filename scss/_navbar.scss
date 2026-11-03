@@ -1,0 +1,30 @@
+// Nagłówek i nawigacja
+
+.top-icons {
+  margin-left: auto;
+  min-width: 350px;
+
+  .col {
+    border-color: #5470a0 !important;
+    max-width: 60px;
+  }
+  .col.col-wider {
+    max-width: 12px;
+  }
+}
+
+.sticky-top {
+  justify-content: flex-start !important;
+
+  .navbar-brand {
+    margin: 2px 16px;
+
+
+    img {
+      @media #{$desktop} {
+        width: auto !important;
+        height: 60px !important;
+      }
+    }
+  }
+}

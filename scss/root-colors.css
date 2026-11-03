@@ -1,0 +1,24 @@
+.primary-text {
+  color: #0041d2 !important; }
+
+.primary-bg {
+  background: #0041d2 !important; }
+
+.dark-text {
+  color: #052d73 !important; }
+
+.dark-bg {
+  background: #052d73 !important; }
+
+.bg-dark-blue {
+  background-color: #00214d !important;
+}
+
+:root {
+  --color-UG: #0041d2;
+  --color-header: #052d73;
+  --hover-UG: #0034A7;
+  --granat-UG: #052d73;
+  --light-white: #A1DAF8;
+  --pure-white: white;
+  --light: #F5F5F5; }

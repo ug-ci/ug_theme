@@ -1,0 +1,173 @@
+{#
+/**
+ * @file
+ * Bootstrap Barrio's theme implementation to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+     Only "getter" methods (method names starting with "get", "has", or "is")
+     and a few common methods such as "id" and "label" are available. Calling
+     other methods (such as node.delete) will result in an exception.
+ * - label: The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: Themed creation date field.
+ * - author_name: Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_node()
+ */
+#}
+{{ attach_library('bootstrap_barrio/node') }}
+
+<article>
+    <div class="container">
+        <div class="row g-4">
+
+            {#   łobrazek   #}
+{#            <div class="col-lg-6 order-2 mt-md-3 mt-0 order-lg-1 ">#}
+{#            <div class="col-lg-6 order-1 order-lg-2 ">#}
+
+            {% if node.field_wynajmy_zdjecie | length > 0 %}
+            <div class="col-lg-6">
+
+{#              <img src="https://ekonom.new.ug.edu.pl/sites/ekonom.ug.edu.pl/files/2023-05/placeholder.png" class="img-fluid mb-4 mb-md-0" />#}
+
+                <img src="{{ node.field_wynajmy_zdjecie['0'].entity.uri.value | image_style('700x500') }}"
+                     alt="{{ node.field_wynajmy_zdjecie[0].alt }}"
+                     class="img-fluid" />
+
+            </div>
+
+            {% endif %}
+{#            </div>#}
+
+            <div class="col-lg-6 order-2 mt-md-3 mt-0 order-lg-1 ">
+
+            {# tytuł strony #}
+            <div class="col-12 pt-2 pb-1">
+                {#                {% if label %}#}
+                {#                {{ title_prefix }}#}
+                {#                {% if label and not page %}#}
+
+                {#                <h1 {{ title_attributes.addClass('node__title') }}>{{ node.field_budynek.value }} - {{ label }}</h1>#}
+                <p {{ title_attributes.addClass('node__title').addClass('h4') }}>{{ label }}</p>
+{#                <p {{ title_attributes.addClass('node__title').addClass('h6 smaller') }}><em>{{ node.field_budynek.entity.title['0'].value }}</em></p>#}
+
+                {#                    <h2{{ title_attributes.addClass('node__title') }}>#}
+                {#                        <a href="{{ url }}" rel="bookmark">{{ label }}</a>#}
+                {#                    </h2>#}
+                {#                {% endif %}#}
+                {#                {{ title_suffix }}#}
+
+
+            </div>
+
+            {#   info dalsze   #}
+{#            <div class="col-lg-6 order-2 mt-md-3 mt-0 order-lg-1 ">#}
+                <div class="col-12 pt-2 pb-1">
+
+                {{ content.body }}
+{#                {% use "@ug_theme/content/include--node--wynajmy-pomieszczenie-details.html.twig" with node as node %}#}
+{#                {% use "@ug_theme/content/include--node--wynajmy-pomieszczenie-details.html.twig" %}#}
+{#                {% block ikonki %}{% endblock %}#}
+{#                nie umiem na razie -- trzeba po prostu robic kopiuj-wklej #}
+
+
+                <div class="row my-4">
+                    <div class="container">
+
+                        <ul class="list-unstyled d-flex flex-column flex-wrap align-content-start columns">
+                            {% if node.field_max_liczba_miejsc.value %}<li class="mb-3"><span class="material-icons me-2 fs-6 text-primary">group</span>Max. liczba miejsc: {{ node.field_max_liczba_miejsc.value }}</li>{% endif %}
+                            {% if node.field_liczba_miejsc.value %}<li class="mb-3"><span class="material-icons me-2 fs-6 text-primary">group</span>Liczba miejsc:
+
+                                {% if node.field_liczba_miejsc|length > 1 %}
+                                    <ul>
+                                        {%  for key,item in node.field_liczba_miejsc %}
+                                            <li>{{ item.value }}</li>
+                                        {%  endfor %}
+                                    </ul>
+                                {%  else %}
+                                    {{  node.field_liczba_miejsc.value |join('; ') }}
+                                {% endif %}
+                                </li>
+                            {% endif %}
+
+                            {% if node.field_powierzchnia.value %}<li><span class="material-icons me-2 fs-6 text-primary">fullscreen</span>Powierzchnia: {{ node.field_powierzchnia.value }}&nbsp;m<sup class="small">2</sup></li>{% endif %}
+
+{# komputery #}
+                            {% if node.field_liczba_komputerow.value %}
+                                <li><span class="material-icons me-2 fs-6 text-primary">computer</span>
+                                    Komputery:
+
+                                    {# TODO pole wielokrotne (separator ',') #}
+
+                                    {% if node.field_liczba_komputerow|length > 1 %}
+                                        <ul>
+                                            {%  for key,item in node.field_liczba_komputerow %}
+                                                <li>{{ item.value }}</li>
+                                            {%  endfor %}
+                                        </ul>
+                                    {%  else %}
+                                        {{  node.field_liczba_komputerow.value |join('; ') }}
+                                    {% endif %}
+                                </li> {% endif %}
+{# field_wyposazenie #}
+                            {% for wyposazenie in node.field_wyposazenie %}
+                                <li>
+                                    <span class="material-icons me-2 fs-6 text-primary">{{ wyposazenie.entity.field_ikonka.value['0'].icon }}</span>
+                                    {{ wyposazenie.entity.name.value }}</li>
+                            {%  endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <a href="{{ path('entity.node.canonical', {'node': node.id  }) }}" class="btn btn-link">Szczegóły</a>
+{#                <a href="/node/{{ node.id }}" class="btn btn-link">Szczegóły</a>#}
+            </div>
+        </div>
+        </div>
+    </div>
+</article>
+

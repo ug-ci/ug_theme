@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+* EN - wykaz szkół doktorskich
+ * Kopia z:
+ - bootstrap_barrio/templates/content/taxonomy-term.html.twig
+ - ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig
+ *
+ * Rekrutacja: lista Szkół doktorskich EN
+ */
+#}
+
+{%
+  set classes = [
+  'taxonomy-term',
+  'vocabulary-' ~ term.bundle|clean_class,
+]
+%}
+{% extends "@ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig" %}
+{% if user.hasRole('administrator') %}
+    {% set hide_prezentacja = 1 %} {# nie pokazuj podpiętych stron #}
+    {% block blockbefore %}
+        {{ drupal_contextual_links('entity.view.edit_form:view=szkoly_doktorskie:display_id=block_rekrutacja') }}
+        {{ drupal_view('szkoly_doktorskie' , 'block_rekrutacja') }}
+    {% endblock %}
+{% endif %}

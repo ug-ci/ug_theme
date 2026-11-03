@@ -1,0 +1,110 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the SASS Starterkit subtheme.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Site\Settings;
+
+/**
+ * Implements hook_form_system_theme_settings_alter() for settings form.
+ *
+ * Replace Barrio setting options with subtheme ones.
+ *
+ * Example on how to alter theme settings form
+ */
+function ug_theme_form_system_theme_settings_alter(&$form, FormStateInterface $form_state) {
+  $form['components']['navbar']['bootstrap_barrio_navbar_top_background']['#options'] = [
+    'bg-primary' => t('Primary'),
+    'bg-secondary' => t('Secondary'),
+    'bg-light' => t('Light'),
+    'bg-dark' => t('Dark'),
+    'bg-white' => t('White'),
+    'bg-transparent' => t('Transparent'),
+  ];
+  $form['components']['navbar']['bootstrap_barrio_navbar_background']['#options'] = [
+    'bg-primary' => t('Primary'),
+    'bg-secondary' => t('Secondary'),
+    'bg-light' => t('Light'),
+    'bg-dark' => t('Dark'),
+    'bg-white' => t('White'),
+    'bg-transparent' => t('Transparent'),
+  ];
+
+
+    // nowa opcja do wyboru pakietu Bootstrapa
+     $form['bootstrap_barrio_source']['#options']['ug_theme/bootstrap_ug'] = t('Bootstrap UG');
+}
+
+/**
+ * tutaj dodajemy do 'page_classes' klasy oparte na wartosci z settings.php
+ *
+ */
+function ug_theme_preprocess_page(&$variables)
+{
+  $pc =  Settings::get('page_classes', [] );
+
+  foreach ($pc as $p){
+    $variables['page']['page_classes'][] = $p;
+  }
+}
+
+
+
+
+/**
+ *
+ * EWA
+ * Implements hook_theme_suggestions_HOOK_alter().
+ *
+ * Add theme suggestions for img elements.
+ */
+//
+//function ug_theme_suggestions_image_alter(array &$suggestions, array $variables) {
+//  if (isset($variables['style_name']) && !is_null($variables['style_name'])) {
+//    $suggestion = 'image__' . $variables['style_name'];
+//    $suggestion = str_replace('-', '_', $suggestion);
+//    $suggestions[] = $suggestion;
+//  }
+//}
+
+function ug_theme_preprocess_image(&$variables) {
+    // dodaj klasy zdefiniowane w module `ug_image_style_tweak`
+    if(function_exists('image_style_custom_css_class_helper')){
+        $classes = image_style_custom_css_class_helper($variables['style_name']);
+        $variables['attributes']['class'][] = $classes;
+    }
+}
+
+
+/**
+ * @param $variables
+ * @param $hook
+ *
+ * Wstawia do zmiennej ścieżkę do skórki
+ *
+ * @return void
+ */
+function ug_theme_preprocess(&$variables, $hook)
+{
+  $variables['parent_path'] = \Drupal::service('extension.list.theme')->getPath('ug_faculty');
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $variables['language'] = $language;
+}
+
+
+//
+//function ug_theme_theme_suggestions_taxonomy_term_alter(array &$suggestions, array $variables) {
+//  if (empty($variables['elements']['#taxonomy_term']) || empty($variables['elements']['#view_mode'])) {
+//    return;
+//  }
+//
+//  /** @var \Drupal\taxonomy\TermInterface $term */
+//  $term = $variables['elements']['#taxonomy_term'];
+//  $view_mode = $variables['elements']['#view_mode'];
+//
+//  $suggestions[] = 'taxonomy_term__' . $view_mode;
+//  $suggestions[] = 'taxonomy_term__' . $term->bundle() . '__' . $view_mode;
+//}

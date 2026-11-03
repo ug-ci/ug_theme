@@ -1,0 +1,509 @@
+//// Strzałki
+
+// Niebieska
+
+.blue-arrow {
+  background: url("/themes/ug_theme/images/arrow-more-right-state.svg");
+  background-repeat: no-repeat;
+  background-size: 43px 11px;
+}
+
+// Biała
+.white-arrow {
+  background: url("/themes/ug_theme/images/arrow-more-right-state.svg");
+  background-repeat: no-repeat;
+  background-size: 43px 11px;
+}
+
+////
+
+
+.read_more,
+.read-more {
+  text-transform: uppercase;
+  color: $primary !important;
+  padding: 0 !important;
+  border: 0 !important;
+
+  &:hover {
+    text-decoration: none !important;
+    color: #052d73;
+    transition: 0.5s;
+  }
+
+  &::after {
+    content: "";
+    background: url("/themes/ug_theme/images/arrow-more-right-state.svg");
+    background-repeat: no-repeat;
+    background-size: 43px 11px;
+    background-position: center right;
+    display: inline-flex;
+    width: 53px;
+    height: 10px;
+    margin-left: 0px;
+    margin-top: 5px;
+    position: absolute;
+    transition: 0.25s;
+    transition-delay: 0s;
+  }
+
+  &:hover::after {
+    margin-left: 5px;
+    margin-top: 5px;
+    position: absolute;
+  }
+}
+
+.btn-primary {
+  color: $pure-white;
+  background-color: $primary !important;
+  border-color: $primary !important;
+  font-weight: bold !important;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 20px 90px 17px 30px !important;
+  border-radius: 0 !important;
+  -webkit-transition: background-color 2s ease-out;
+  -moz-transition: background-color 2s ease-out;
+  -o-transition: background-color 2s ease-out;
+  transition: background-color 2s ease-out;
+
+  &:hover {
+    background-color: $hover-UG !important;
+    color: $pure-white !important;
+    text-decoration: none !important;
+  }
+
+  &::after {
+    content: "";
+    background: url("/themes/ug_theme/images/arrow-more-right-state.svg");
+    background-repeat: no-repeat;
+    background-position: center right;
+    display: inline-flex;
+    width: 53px;
+    height: 10px;
+    filter: invert(100%) saturate(1%) hue-rotate(62deg) brightness(109%) contrast(101%);
+    margin-left: 10px;
+    margin-top: 5px;
+    position: absolute;
+    transition: 0.25s;
+    transition-delay: 0s;
+  }
+
+  &:hover::after {
+    margin-left: 15px;
+    margin-top: 5px;
+    position: absolute;
+  }
+}
+
+//////////////////////////////////
+// Ramki ze strzałką            //
+//                              //
+//////////////////////////////////
+//Białe tło
+a.btn-frame {
+  padding: 15px;
+  border: 2px solid $primary;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 1.3;
+  text-decoration: none !important;
+  width: 100%;
+  max-width: 400px !important;
+  min-height: 100px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  float: left;
+  transition: 0.25s;
+  border-radius: 0px !important;
+  background-image: url(https://ug.edu.pl/themes/ug_theme/images/arrows/arrow-blue.svg) !important;
+  background-repeat: no-repeat !important;
+  background-position: bottom 15px left 15px !important;
+  background-size: 47px 13px !important;
+
+  &:hover {
+    background-color: $hover-UG;
+    border-color: $hover-UG;
+    color: $pure-white !important;
+    text-decoration: none !important;
+    background-image: url(https://ug.edu.pl/themes/ug_theme/images/arrows/arrow-white.svg) !important;
+    background-repeat: no-repeat !important;
+    background-position: bottom 15px left 15px !important;
+    background-size: 57px 13px !important;
+  }
+}
+
+// Niebieskie tło
+.btn-frame-invert {
+  color: $pure-white !important;
+
+  background-color: $primary !important;
+  background-image: url(https://ug.edu.pl/themes/ug_theme/images/arrows/arrow-white.svg) !important;
+  background-repeat: no-repeat !important;
+  background-position: bottom 20px left 15px !important;
+  background-size: 43px 12px !important;
+  min-height: 100px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+
+  &:hover {
+    background-color: $secondary !important;
+    background-image: url(https://ug.edu.pl/themes/ug_theme/images/arrows/arrow-white.svg) !important;
+    color: $pure-white !important;
+    text-decoration: none !important;
+    background-repeat: no-repeat !important;
+    background-position: bottom 20px left 15px !important;
+    background-size: 43px 13px !important;
+  }
+
+}
+
+// Lista linków ramka
+ul.border-box {
+  list-style-type: none;
+  padding-left: 0;
+  padding-right: 20px;
+
+  li a {
+    padding: 15px;
+    border: 2px solid $primary;
+    font-size: 15px;
+    font-weight: bold;
+    width: 100%;
+    max-width: 400px !important;
+    min-height: 100px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    float: left;
+    transition: 0.25s;
+    color: $primary;
+    background: url(https://ug.edu.pl/themes/ug_theme/images/arrows/arrow-blue.svg) !important;
+    background-repeat: no-repeat !important;
+    background-position: bottom 20px left 15px !important;
+    background-size: 47px 13px !important;
+
+    &.btn-frame-invert {
+      background-color: $primary !important;
+      background-image: url(https://ug.edu.pl/themes/ug_theme/images/arrows/arrow-white.svg) !important;
+      background-size: 47px 13px !important;
+    }
+
+    &:hover {
+      background-color: $primary !important;
+      background-image: url(https://ug.edu.pl/themes/ug_theme/images/arrows/arrow-white.svg) !important;
+      color: $pure-white !important;
+      text-decoration: none !important;
+      background-repeat: no-repeat !important;
+      background-position: bottom 20px left 15px !important;
+      background-size: 57px 13px !important;
+    }
+  }
+}
+
+.container-ramki {
+  max-width: 860px;
+}
+
+.ramki-title {
+  font-size: 2rem;
+  color: var(--color-UG);
+}
+
+.ramki-item {
+  margin: 0px;
+  padding: 15px;
+  font-weight: bold;
+
+  &:after {
+    content: "";
+    display: flex;
+    background-image: url("/themes/ug_theme/images/arrow-more-right-state.svg");
+    width: 51px;
+    height: 11px;
+    background-repeat: no-repeat;
+    transition: .25s;
+    transition-delay: .08s;
+    position: relative;
+    top: 10px;
+    left: 0;
+  }
+
+  span {
+    color: #0041d2;
+    text-decoration: none;
+    font-family: "DM sans";
+    font-weight: bold;
+    padding: 15px;
+    background: $pure-white;
+    min-height: 90px;
+  }
+  a:hover {
+    color: $pure-white;
+  }
+
+
+  &:hover {
+    background: var(--hover-UG);
+    color: $pure-white;
+
+    &::after {
+      content: "";
+      display: flex;
+      background-image: url("/themes/ug_theme/images/arrow-more-right-hover.svg");
+      width: 51px;
+      height: 11px;
+      background-repeat: no-repeat;
+      transition: .25s;
+      transition-delay: .08s;
+      filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(62deg) brightness(109%) contrast(101%);
+    }
+
+    span {
+      background: var(--hover-UG);
+      color: $pure-white;
+    }
+  }
+
+}
+
+.ramki-all {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 25px;
+  padding: 15px;
+
+  & > a {
+    min-height: 92px;
+    display: grid;
+    border: 2px solid var(--color-UG);
+  }
+
+  a:hover {
+    background: var(--hover-UG);
+    color: $pure-white;
+  }
+}
+
+
+@media (max-width: 992px) {
+  .ramki-all {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(2, 2fr);
+    grid-gap: 25px;
+  }
+}
+
+@media (max-width: 425px) {
+  .ramki-all {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 2fr);
+  }
+}
+
+
+
+.bg-blue {
+  background: var(--color-UG) !important;
+}
+
+.rekrutacja-item, .sdoktorskie-item,.spodyplomowe-item {
+  height: 100px;
+}
+
+.sdoktorskie-item {
+  background: var(--color-UG);
+  display: block;
+}
+
+.spodyplomowe-item {
+  background: $pure-white;
+  display: block;
+  border: 2px solid var(--color-UG);
+}
+
+.blueline {
+  height: 2px;
+  background: var(--color-UG);
+}
+
+////// NEW BUTTONS
+/// 
+/// 
+.btn {
+  font-size: 14px !important;
+  padding: 20px 30px 17px;
+
+  &.btn-sm {
+    font-size: 12px;
+  }
+
+  &.active {
+    background: $secondary !important;
+  }
+
+  &.btn-frame {
+    padding: 15px;
+    padding-bottom: 40px;
+    border: 2px solid $primary !important;
+    color: $primary !important;
+    min-height: 90px !important;
+    width: 100% !important;
+    text-align: left !important;
+    display: flex !important;
+    background: url("https://ug.edu.pl/themes/ug_theme/images/arrow-more-right-state.svg") no-repeat bottom 15px left 15px;
+    transition: 0.25s;
+    transition-delay: 0s;
+    float: left;
+    margin-bottom: 30px;
+    margin-right: 30px;
+    max-width: 366px;
+
+    &:hover {
+      background-color: $primary;
+      color: $pure-white !important;
+      background-image: url("/themes/ug_theme/images/arrow-white.png");
+      background-position-x: 25px;
+    }
+
+    &:active,
+    &:focus {
+      background-color: $primary !important;
+      color: $pure-white !important;
+      background-image: url("/themes/ug_theme/images/arrow-white.png");
+      outline: 3px solid $secondary !important;
+    }
+  }
+}
+
+.btn-outline {
+
+  &-primary,
+  &-secondary,
+  &-success,
+  &-danger,
+  &-warning,
+  &-info,
+  &-light,
+  &-dark {
+    border-width: 2px !important;
+    border-style: solid;
+  }
+}
+
+.btn-link,
+.read-more,
+.read_more {
+  font-size: 14px;
+  padding-left: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  color: $primary;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  padding-right: 65px !important;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:focus {
+    text-decoration: none;
+    outline: 3px solid $primary !important;
+  }
+
+  &::after {
+    content: "";
+    background: url("https://ug.edu.pl/themes/ug_theme/images/arrow-more-right-state.svg");
+    background-repeat: no-repeat;
+    background-position: center right;
+    display: inline-flex;
+    width: 53px;
+    height: 10px;
+    margin-left: 0;
+    margin-top: 5px;
+    position: absolute;
+    transition: 0.25s;
+    transition-delay: 0s;
+    color: $secondary;
+  }
+
+  &:hover::after {
+    margin-left: 5px;
+    margin-top: 5px;
+    position: absolute;
+  }
+}
+
+.btn-link {
+  padding: 0 !important;
+}
+
+.btn-arrow {
+  text-transform: uppercase;
+  padding-right: 82px;
+
+  &:focus,
+  &:focus-visible {
+    outline: 2px solid $btn-focus-outline;
+  }
+
+  &::after {
+    content: "";
+    background: url("https://ug.edu.pl/themes/ug_theme/images/arrow-more-right-state.svg");
+    background-position-x: 0;
+    background-position-y: 0;
+    background-repeat: no-repeat;
+    background-position: center right;
+    display: inline-flex;
+    width: 53px;
+    height: 10px;
+    filter: invert(100%) saturate(1%) hue-rotate(62deg) brightness(109%) contrast(1001%);
+    margin-left: 10px;
+    margin-top: 5px;
+    position: absolute;
+    transition: 0.25s;
+    transition-delay: 0s;
+  }
+
+  &:hover {
+    background: $secondary;
+  }
+
+  &:hover::after {
+    margin-left: 15px;
+    margin-top: 5px;
+    position: absolute;
+  }
+}
+
+.btn {
+
+  &-primary,
+  &-secondary,
+  &-success,
+  &-danger,
+  &-warning,
+  &-info,
+  &-light,
+  &-dark {
+    &.btn-arrow {
+      @extend .btn-arrow;
+      text-decoration: none !important;
+    }
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

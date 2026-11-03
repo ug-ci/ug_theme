@@ -1,0 +1,141 @@
+{#
+/**
+ * @file
+ * Bootstrap Barrio's theme implementation to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+     Only "getter" methods (method names starting with "get", "has", or "is")
+     and a few common methods such as "id" and "label" are available. Calling
+     other methods (such as node.delete) will result in an exception.
+ * - label: The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: Themed creation date field.
+ * - author_name: Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_node()
+ */
+#}
+{{ attach_library('bootstrap_barrio/node') }}
+
+
+{#1. 2 x opis z 2 x zdjęcie#}
+{#2. lista rodzajów pomieszczeń#}
+{#{{  drupal_view('wynajmy_pomieszczenia', 'block_rodzaje_pomieszczen', {{ id }}) }}#}
+
+{#3. lista pomieszczeń zgrupowanych po rodzaju pomieszczenia#}
+{#4. dodatkowe powierzchnie??? może jako oddzielne pole?#}
+{#  albo w rodzajach pomieszczeń nowe pole "wyświetlaj w wersji skróconej"#}
+
+{%
+    set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'clearfix',
+]
+%}
+
+
+<article{{ attributes.addClass(classes) }}>
+    <div class="container">
+        <!-- dwie kolumny -->
+            <div class="row g-5">
+                <div class="col-md-6">
+                    <!-- karta pionowa 1 -->
+                    <div class="card-text">{{ content.body }}
+                    </div>
+
+{#                    {% set image_styled = {
+#}
+{#                        '#theme': 'image_style',#}
+{#                        '#style_name': 'thumbnail',#}
+{#                        '#uri': node.field_zdjecie_budynku[0].entity.uri.value,#}
+{#                        '#alt': node.field_zdjecie_budynku[0].alt,#}
+{#                    } %}#}
+
+{#                    {{ image_styled }}#}
+
+
+                    {{ drupal_field('field_zdjecie_budynku', 'node', node.id, 'full') }}
+                </div>
+                <div class="col-md-6 d-flex d-md-block flex-column-reverse">
+                    <!-- karta pionowa 2 -->
+                    {{ drupal_field('field_zdjecie_uzupelniajace', 'node', node.id, 'full') }}
+
+                    <p class="card-text">{{ drupal_field('field_tekst_uzupelniajacy', 'node', node.id, 'full') }}</p>
+                </div>
+            </div>
+        </div>
+
+{#    <!-- lista rodzajów pomieszczeń -->#}
+    {{ drupal_contextual_links('entity.view.edit_form:view=wynajmy_pomieszczenia_rodzaje:display_id=block_wg_budynku') }}
+    {{  drupal_view('wynajmy_pomieszczenia_rodzaje', 'block_wg_budynku',  node.id ) }}
+
+    <hr />
+    <!-- pełna lista pomieszczeń -->
+    {{ drupal_contextual_links('entity.view.edit_form:view=wynajmy_pomieszczenia:display_id=block_pomieszczenia_lista') }}
+    {{  drupal_view('wynajmy_pomieszczenia', 'block_pomieszczenia_lista',  node.id ) }}
+
+    <!-- kontakt -->
+
+
+    <hr />
+
+    {{ drupal_contextual_links('entity.view.edit_form:view=wynajmy_kontakt_do_budynku:display_id=block_kontakt') }}
+    {{  drupal_view('wynajmy_kontakt_do_budynku', 'block_kontakt', node.id ) }}
+
+{#    {{ kint(node.field_wspolrzedne.value) }}#}
+{#    {{ kint(node.field_wspolrzedne) }}#}
+    {% if node.field_wspolrzedne.value  | length > 0 %}
+    <hr />
+    {{  drupal_view('wynajmy_kontakt_do_budynku', 'block_mapka', node.id ) }}
+    {% endif %}
+
+</article>

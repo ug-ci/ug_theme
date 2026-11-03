@@ -1,0 +1,80 @@
+
+.card-title {
+    text-decoration: none !important;
+}
+
+.home-news {
+
+
+    @include respond-below(md) {
+        .col-lg-6 .card .border-bottom {
+            padding-left: 0px !important;
+            padding-right: 0px !important;
+
+            h3 {
+                margin-top: 0px !important;
+            }
+
+            h3.card-title a {
+                color: $dark-blue;
+            }
+        }
+    }
+
+
+}
+
+.o-uniwersytecie .card {
+    border-radius: 0px !important;
+    border: 0px !important;
+    min-height: 470px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+
+    @media #{$desktop} {
+        min-height: 20px;
+    }
+
+    a {
+        color: $dark-blue;
+    }
+
+    h5 a {
+        font-size: 18px !important;
+    }
+
+    h5 {
+        margin-bottom: 1rem;
+    }
+
+    @media #{$desktop} {
+        p {
+            padding-bottom: 2rem !important;
+        }
+    }
+
+    .card-body {
+        padding: 2rem;
+    }
+
+    .read_more {
+        position: absolute;
+        bottom: 2rem;
+
+    }
+}
+
+.card-grid {
+    .card-body h3 {
+        min-height: 60px
+    }
+}
+
+.card img {
+    .img-thumbnail {
+        max-width: 150px !important;
+        max-height: 150px !important;
+        border: 0px !important;
+    }
+}

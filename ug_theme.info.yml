@@ -1,0 +1,62 @@
+name: UG Theme
+type: theme
+description: "Basic structure for UG Theme"
+core: 8.x
+core_version_requirement: ^8 || ^9
+base theme: bootstrap_barrio
+
+libraries:
+  #  - ug_theme/bootstrap_cdn
+  #  - ug_theme/bootstrap
+  #  - ug_theme/bootstrap_ug
+  - ug_theme/global-styling
+
+libraries-override:
+  # podmiana pliku CSS z modulu ckeditor_accordion na styl ładowany
+  # ze skorki ug_faculty: /themes/ug_faculty/css/components/ckeditor-accordion.css,
+  # który jest dostosowaną kopią tego modułowego - inaczej przeszkadzały sobie nawzajem;
+  # dzięki temu modułowy CSS nie ładuje się w ogóle i nie trzeba ładować specjalnie tego skórkowe pliku CSS w libhraries/global_style
+  ckeditor_accordion/accordion.frontend:
+    css:
+      theme:
+        css/accordion.frontend.css: css/components/ckeditor-accordion.css
+# zmiany jeszcze by Paulina - żeby nie podmieniać całej biblioteki superfish
+    superfish/sfsmallscreen:
+      js:
+        js/sfsmallscreen.js: js/sfsmallscreen.js
+
+ckeditor_stylesheets:
+  - css/root-colors.css
+  - css/components/ckeditor-styles.css
+ckeditor5-stylesheets:
+  - css/root-colors.css
+  - css/components/ckeditor-styles.css
+
+regions:
+  top_header: "Top header"
+  top_header_form: "Top header form"
+  header: Header
+  header_form: "Header form"
+  primary_menu: "Primary menu"
+  secondary_menu: "Secondary menu"
+  page_top: "Page top"
+  page_bottom: "Page bottom"
+  highlighted: Highlighted
+  featured_top: "Featured top"
+  breadcrumb: Breadcrumb
+  content: Content
+  sidebar_first: "Sidebar first"
+  sidebar_second: "Sidebar second"
+  featured_bottom: "Baner"
+  footer_columns: "Footer"
+  # footer_bottom: 'Footer bottom'
+  # footer_first: 'Footer first'
+  # footer_second: 'Footer second'
+  # footer_third: 'Footer third'
+  # footer_fourth: 'Footer fourth'
+  footer_fifth: "Bottom icons bar"
+
+# Information added by Drupal.org packaging script on 2021-05-23
+version: "1.1"
+project: "bootstrap_barrio"
+#datestamp: 1621798645

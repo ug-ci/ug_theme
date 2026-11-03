@@ -1,0 +1,83 @@
+.home-news {
+    .text-white.text-decoration-none.fs-5:hover {
+        color: $pure-white !important;
+    }
+}
+
+.baner-biznes {
+    background: url(https://ug.edu.pl/_downloads/biznes.webp);
+    background-position: center center;
+    background-attachment: fixed;
+    min-height: 40vh;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.text-align-justify {
+    text-align: left !important;
+}
+
+.page-view-frontpage {
+    .layout-main-wrapper {
+        background-image: url("/themes/ug_theme/images/underslider_s.png") !important;
+        background-repeat: no-repeat !important;
+    }
+
+    @include respond-below(sm) {
+        .layout-main-wrapper {
+            background-size: 35% !important;
+            background-position-y: 42px !important;
+        }
+
+    }
+}
+
+.globe {
+    border-bottom: 1px solid silver
+}
+
+.globe .col-12,
+.globe .col {
+    padding: 8px !important;
+    font-size: 14px !important;
+    border: 1px solid silver;
+    border-bottom: 0px;
+    border-right: 0px;
+    font-size: 12px !important
+}
+
+@media only screen and (max-width: 992px) {
+
+    .globe .col-12,
+    .globe .col {
+        border: 0px
+    }
+}
+
+.globe .col {
+    border-right: 1px solid silver
+}
+
+@media only screen and (max-width: 992px) {
+    .globe .col {
+        border: 0px
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .globe .row {
+        border: 1px solid silver;
+        margin: 10px;
+        margin-bottom: 20px
+    }
+}
+
+@media only screen and (max-width: 992px) {
+
+    .globe .col-lg-1,
+    .globe .col-lg-2 {
+        max-width: 50% !important
+    }
+}

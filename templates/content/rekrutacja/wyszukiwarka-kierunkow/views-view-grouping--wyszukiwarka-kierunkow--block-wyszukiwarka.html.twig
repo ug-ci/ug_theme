@@ -1,0 +1,71 @@
+{#
+/**
+ * @file
+ * Theme override to display a single views grouping.
+ *
+ * Available variables:
+ * - view: The view object.
+ * - grouping: The grouping instruction.
+ * - grouping_level: A number indicating the hierarchical level of the grouping.
+ * - title: The group heading.
+ * - content: The content to be grouped.
+ * - rows: The rows returned from the view.
+ *
+ * @see template_preprocess_views_view_grouping()
+ */
+#}
+
+{#AA:#}
+{#grouping_level : {{  grouping_level }}#}
+{#{{ kint(grouping_level) }}#}
+{#<div class="view-grouping">#}
+    {% if grouping_level == 0 %}
+{#        BBB (grouping_level == 0)#}
+<div class="container">
+<div class="row pb-2">
+        <h2 class="pt-4 pb-2 underline">{{ title }}</h2>
+        {% if language.getId() == 'pl' %}<p class="pb-2">Kierunki studiów:</p>{% endif %}
+{#    {{  kint(grouping) }}#}
+{#        {{ grouping }}#}
+        {{ grouping.content }}
+        <div class="accordion shadow accordion-flush p-0 mx-2">
+            <div class="accordion-item">
+                {{ content }}
+            </div>
+        </div>
+</div></div>
+    {% elseif grouping_level == 1 %}
+{#grouping_level : {{  grouping_level }}#}
+{#        CCC (grouping_level == 1)#}
+        {% if content[0]['#rows'] is not null %}
+        {% set item_id_row = content[0]['#rows']|last %}
+{#        {% set item_id_row = rows|last %}#}
+{#            {{  kint(item_id_row) }}#}
+        {% set stopien = item_id_row['#row'].node__field_stopien_field_stopien_value  %}
+        {% set wydzial = item_id_row['#row'].node__field_wydzial_field_wydzial_target_id  %}
+        {% set acc_id =  stopien ~ '_' ~ wydzial %}
+        <h3 class="accordion-header w-100 border-top border-bottom" id="flush-heading_{{ acc_id }}">
+            <button aria-controls="flush-collapse_{{ acc_id }}"
+                    aria-expanded="false" class="accordion-button collapsed" data-bs-target="#flush-collapse_{{ acc_id }}"
+                    data-bs-toggle="collapse" type="button"> {{ title }}
+            </button>
+        </h3>
+    <div aria-labelledby="flush-heading_{{ acc_id }}" class="accordion-collapse collapse px-2"
+         data-bs-parent="#accordionFlushExample" id="flush-collapse_{{ acc_id }}">
+{#        BBBBBBB#}
+        {{ content }}
+    </div>
+{#AAAAA#}
+
+            {% endif %}
+
+    {% elseif grouping_level == 2 %}
+{#grouping_level : {{  grouping_level }}#}
+        <h4 class="py-2">{{ title }}</h4>
+        {{ content }}
+    {% else %}
+{#CC grouping_level : {{  grouping_level }}#}
+        {{ title }}
+        {{ content }}
+    {% endif %}
+{#</div>#}

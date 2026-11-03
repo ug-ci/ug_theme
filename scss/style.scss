@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+// =============================================================================
+// UG Theme — główny arkusz (kompilowany do css/style.css)
+//
+// Motyw jest nakładką na Bootstrap 5.3 (Bootstrap ładowany jest jako gotowy
+// plik CSS przez bibliotekę `bootstrap_ug`, nie przez ten arkusz). Kolejność
+// importów odwzorowuje warstwy Bootstrapa: najpierw konfiguracja (zmienne,
+// miksiny), potem style bazowe, układ/nawigacja, komponenty, treść i na końcu
+// narzędzia/poprawki nadpisujące.
+// =============================================================================
+
+// 1. Konfiguracja — zmienne, breakpointy, miksiny (bez wyjścia CSS)
+@import "variables";
+
+// 2. Warstwa bazowa — kolory-utility, typografia, nagłówki, elementy globalne
+@import "colors";
+@import "fonts";
+@import "headings";
+@import "base";
+
+// 3. Układ i nawigacja
+@import "navbar";
+@import "left-menu";
+@import "menu";
+@import "header";
+@import "footer";
+@import "navigation";
+
+// 4. Komponenty
+@import "buttons";
+@import "cards";
+@import "tables";
+@import "forms";
+@import "slider";
+@import "news";
+@import "tiles";
+// @import "search";
+@import "ckeditor-accordion";
+
+// 5. Treść (widoki, bloki redakcyjne)
+@import "content";
+
+// 6. Narzędzia i poprawki (nadpisania utrzymywane na końcu kaskady)
+@import "custom";
+// UWAGA: _fixes.scss NIE był importowany w pierwotnym style.scss (martwy plik).
+// Zawiera m.in. responsywne utility w-*/h-* oraz .ramki. Odkomentuj świadomie —
+// dołączy ok. 37 nowych reguł do skompilowanego CSS.
+// @import "fixes";

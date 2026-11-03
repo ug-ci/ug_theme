@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+    Szablon do wyświetlania danych sszkół doktorskich
+ */
+#}
+{% if mode and nid %}
+    {% block blockbefore %}
+        {% if mode == 'limity' %} {# limity przyjęć #}
+            {{ drupal_entity('node', nid, 'szkoly_doktorskie_limity_przyjec') }}
+        {% endif %}
+        {% if mode == 'zasady' %} {# zasady rekrutacji #}
+            {{ drupal_entity('node', nid, 'szkoly_doktorskie_zasady_rekrutacji') }}
+        {% endif %}
+        {% if mode == 'terminy' %} {# terminy rekrutacji #}
+            {{ drupal_entity('node', nid, 'szkoly_doktorskie_terminy') }}
+        {% endif %}
+        {% if mode == 'kontakt' %} {# kontakt #}
+            {{ drupal_entity('node', nid, 'szkoly_doktorskie_kontakt') }}
+        {% endif %}
+        {% if mode == 'oplaty' %} {# opłaty #}
+            {{ drupal_entity('node', nid, 'szkoly_doktorskie_oplaty') }}
+        {% endif %}
+    {% endblock %}
+{% endif %}

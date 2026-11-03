@@ -1,0 +1,21 @@
+.flexslider {
+    .flex-direction-nav {
+        top: -125px !important;
+    }
+
+    h2 {
+        font-weight: 600 !important;
+    }
+
+    @include respond-below(sm) {
+        .flex-control-paging {
+            margin-top: 20px !important;
+        }
+        .flex-direction-nav {
+            top: -69px !important;
+        }
+    }
+}
+.title-slider h2 {
+    color: $pure-white !important;
+}

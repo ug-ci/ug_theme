@@ -1,0 +1,356 @@
+
+body {
+    color: #141414 !important;
+    counter-reset: list;
+}
+
+.ramka {
+    font-size: 1.3rem;
+    text-align: left;
+    margin: 2rem 0;
+    list-style-type: none;
+    background-color: #fff;
+    border-left: 6px solid var(--color-UG);
+    padding: 0.4rem 2.65rem;
+}
+
+.ramka.archived {
+  background: hsl(0deg 0% 96%);
+  padding: 1.5rem;
+}
+
+/* TLO KOLOR */
+
+.color_Biotechnologia_tlo, .color_Biotechnologia_tlo a {
+    background-color: #da251d;
+    color: white !important;
+}
+
+.color_Biologia_tlo, .color_Biologia_tlo a {
+    background-color: #00923f;
+    color: white !important;
+}
+
+.color_Chemia_tlo, .color_Chemia_tlo a {
+    /*background-color: #b3a514;*/
+    background-color: #938c0f;
+    color: white;
+}
+
+.color_Ekonomiczny_tlo, .color_Ekonomiczny_tlo a {
+    background-color: #005e97;
+    color: white;
+}
+
+.color_Filologia_tlo, .color_Filologia_tlo a {
+    background-color: #222d7c;
+    color: white;
+}
+
+.color_Historyczny_tlo, color_Historyczny_tlo a {
+    background-color: #e77817;
+    color: white;
+}
+
+.color_MFiI_tlo, .color_MFiI_tlo a {
+    background-color: #717883 ;
+    color: white;
+}
+
+.color_OiG_tlo, .color_OiG_tlo a {
+    /*background-color: #df9a0d;*/
+    background-color: #c18815;
+    /*background-color: #a8740a;*/
+    color: white;
+}
+
+.color_PiA_tlo, .color_PiA_tlo a {
+    background-color: #501a70;
+    color: white;
+}
+
+.color_WNS_tlo, .color_WNS_tlo a {
+    background-color: #902a49;
+    color: white;
+}
+
+.color_Zarzadzania_tlo, .color_Zarzadzania_tlo a {
+    background-color: #27552b;
+    color: white;
+}
+
+/*TEKST KOLOR*/
+
+.color_UG {
+    color: var(--color-UG);
+}
+
+.color_Biotechnologia {
+    color: #da251d;
+}
+
+.color_Biologia {
+    color: #00923f;
+}
+
+.color_Chemia {
+    color: #b3a514;
+}
+
+.color_Ekonomiczny {
+    color: #005e97;
+}
+
+.color_Filologia {
+    color: #222d7c;
+}
+
+.color_Historyczny {
+    color: #e77817;
+}
+
+.color_MFiI {
+    color: #9198a1;
+}
+
+.color_OiG {
+    color: #df9a0d;
+}
+
+.color_PiA {
+    color: #501a70;
+}
+
+.color_WNS {
+    color: #902a49;
+}
+
+.color_Zarzadzania {
+    color: #27552b;
+}
+
+.wyroznienie1 {
+    color: #c6221a;
+}
+
+.wyroznienie2 {
+    color: #758c26;
+}
+
+.wyroznienie3 {
+    color: #fd9f00;
+}
+
+.wyroznienie4 {
+    color: #0cb0e0;
+}
+
+.szary {
+    color: #676767;
+}
+
+
+/* PODPIS */
+
+.podpis {
+    text-align: center;
+    float: left;
+    margin-left: 60%;
+    font-style: italic;
+}
+
+/* KAPITALIKI */
+
+.kapitaliki {
+    font-variant: small-caps;
+}
+
+/* LISTA */
+
+.squares {
+    list-style-type: none;
+    list-style-position: inside;
+    padding-left: 0;
+}
+
+.squares li {
+    margin: 0 0 6.5px 0;
+    padding: 0;
+    line-height: 1;
+}
+
+.squares li::before {
+    content: "\2219" !important;
+    color: var(--color-UG);
+    font-size: 3.2em;
+    display: inline-block;
+    font-weight: bold;
+    margin: 0;
+    width: 0.5em;
+    line-height: 0.2em;
+    vertical-align: middle;
+    margin-bottom: .07em;
+}
+
+.circles {
+    list-style-type: none;
+}
+
+.circles li {
+    text-indent: -1.5em;
+    margin: 6.5px auto;
+}
+
+.circles li::before {
+    text-indent: 0em;
+    display: inline-block;
+    counter-increment: list;
+    content: counter(list,decimal);
+    margin-right: 13px;
+    width: 1.6em;
+    height: 1.6em;
+    line-height: 1.6em;
+    text-align: center;
+    vertical-align: 3px;
+    background-color: var(--color-UG);
+    color: #fff;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    font-weight: bold;
+}
+
+/* Tabelki */
+table:not(.sticky-header) {
+  width: 100% !important;
+}
+
+table {
+    border: solid 1px #141414;
+}
+
+/*tbody tr:first-child {*/
+/*    color: var(--color-UG);*/
+/*}*/
+
+table thead th {
+	border: solid 1px #141414;
+}
+
+tr td, tr th {
+    border: 1px solid #141414 !important;
+}
+
+table tr th {
+	background: #f5f5f5 !important;
+	border-bottom-style: none;
+	color: var(--color-UG) !important;
+}
+
+table tr {
+	background: #fff;
+	border: 1px solid;
+}
+
+table tr,
+table th
+table td, .table td {
+	border: 1px solid #141414;
+  padding: 15px !important;
+}
+
+table tr,
+table td {
+	border-bottom: 1px solid #141414 !important;
+	border-top: 1px solid #141414 !important;
+	padding: 15px;
+}
+
+.table thead th {
+	border-bottom: 1px solid #141414 !important;
+	border-top: 1px solid #141414 !important;
+	padding: 15px;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+	background-color: #fff !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) td {
+	box-shadow: none;
+}
+
+
+
+/*TABELA NAGLOWKI PIERWSZY WIERSZ*/
+
+table thead th {
+    border-bottom-color: #141414;
+}
+
+
+/*TABELA NAGLOWKI BRAK */
+
+/*TABELA NAGLOWKI - PIERWSZA KOLUMNA */
+
+/*TABELA NAGLOWKI - OBA */
+
+
+/*TABELA STYLE */
+
+.szary_tlo_jasne {
+    background-color: #cfcfcf;
+}
+
+.szary_tlo_srednie {
+    background-color: #747474;
+}
+
+.szary_tlo_ciemne {
+    background-color: #676767;
+}
+
+.bez_tla {
+    border-color: #cfcfcf !important;
+}
+
+.bez_tla tr {
+    border-color: #cfcfcf !important;
+}
+
+.bez_tla td {
+    border-color: #cfcfcf !important;
+}
+
+
+.even tbody tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+.odd tbody tr:nth-child(odd) {
+    background-color: #f5f5f5;
+}
+
+/*ZALACZNIKI*/
+table .file a {
+    color: #000;
+}
+
+
+.table-hover>tbody>tr:hover {
+    --bs-table-accent-bg: none !important;
+    color: var(--hover-UG);
+}
+
+.table-hover tbody tr:hover {
+    background-color: #fff !important;
+}
+
+table .file a:hover {
+    color: var(--hover-UG);
+}
+
+/* linki */
+.field--name-body a {
+  overflow-wrap: break-word;
+  max-width: fit-content;
+}

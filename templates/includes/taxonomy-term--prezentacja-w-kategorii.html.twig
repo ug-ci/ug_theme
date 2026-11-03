@@ -1,0 +1,42 @@
+{#
+      !!!!! Na razie nieużywane
+#}
+
+
+
+{#
+p|Pełna treść artykułów
+t|Tytuły - lista tytułów stron
+s|Podsumowania - lista tytułów i skrótów treści
+g|Galeria - lista z 1 zdjęciem z galerii i tytułem strony, do stosowania do listowania galerii
+d|Prezentacja poddziałów
+pt|Pełna treść pierwszego artykułu + tytuły pozostałych artykułów
+#}
+    {% if term.field_prezentacja %}
+      {% if term.field_prezentacja.value == 't' %}
+        {# t|Tytuły - lista tytułów stron #}
+        {{ drupal_view('prezentacja_w_kategorii', 'blok_tytuly', tid) }}
+      {% elseif term.field_prezentacja.value == 'p' %}
+        {# p|Pełna treść artykułów #}
+        {{ drupal_view('prezentacja_w_kategorii', 'blok_pelna_tresc', tid) }}
+      {% elseif term.field_prezentacja.value == 's' %}
+        {# s|Podsumowania - lista tytułów i skrótów treści #}
+        {{ drupal_view('prezentacja_w_kategorii', 'blok_skroty', tid) }}
+      {% elseif term.field_prezentacja.value == 'g' %}
+        {# g|Galeria - lista z 1 zdjęciem z galerii i tytułem strony, do stosowania do listowania galerii #}
+        {{ drupal_view('prezentacja_w_kategorii', 'blok_galeria', tid) }}
+      {% elseif term.field_prezentacja.value == 'd' %}
+        {# d|Prezentacja poddziałów #}
+        {{ drupal_view('prezentacja_w_kategorii_terminy', 'blok_poddzialy', tid) }}
+      {% elseif term.field_prezentacja.value == 'pt' %}
+        {# pt|Pełna treść pierwszego artykułu + tytuły pozostałych artykułów #}
+        {{ drupal_view('prezentacja_w_kategorii', 'blok_pierwszy_artykul', tid) }}
+        {{ drupal_view('prezentacja_w_kategorii', 'blok_tytuly_z_przesunieciem_o_1', tid) }}
+      {% elseif term.field_prezentacja.value == 'one' %}
+        {{ drupal_view('prezentacja_w_kategorii', 'block_article_no_title', tid) }}
+        {{ drupal_view('prezentacja_w_kategorii', 'blok_tytuly_z_przesunieciem_o_1', tid) }}
+      {% else %}
+        {# brak prezentacji|Pełna treść artykułów #}
+        {{ drupal_view('prezentacja_w_kategorii', 'blok_pelna_tresc', tid) }}
+      {% endif %}
+    {% endif %}

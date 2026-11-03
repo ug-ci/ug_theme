@@ -1,0 +1,453 @@
+{#
+/**
+ * @file
+ * Bootstrap Barrio's theme implementation to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+     Only "getter" methods (method names starting with "get", "has", or "is")
+     and a few common methods such as "id" and "label" are available. Calling
+     other methods (such as node.delete) will result in an exception.
+ * - label: The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: Themed creation date field.
+ * - author_name: Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_node()
+ */
+#}
+{{ attach_library('bootstrap_barrio/node') }}
+
+{% set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'clearfix',
+] %}
+
+
+{# szkoły doktorskie - podstrona "kontakt" #}
+
+
+
+<div class="contextual-region">
+    {{ title_suffix }}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-sm-12 d-flex">
+            <div class="shadow p-3 w-100 h-100">
+                {#            TREŚĆ STAŁA  #}
+
+
+
+                {% set komisja = node.field_terminy_rekrutacji_dokt.entity %}
+                {% set budynek = komisja.field_adres_komisji_budynek.entity %}
+                {% if budynek and budynek.field_adres_budynku.value %}
+                    {% set adres = budynek.field_adres_budynku %}{% else %}{% set adres = null %}
+                {% endif %}
+
+                {#                    'field_nazwa_kontaktu' : { value: 'Biuro Rekrutacji'}, #}
+                {% set tel_mail_r = {
+                    'field_telefon' : { value: {value: '58 523 33 27'}},
+                    'field_email' : { value: {value: 'rekrutacja@ug.edu.pl'}},
+                    'field_informacje_uzupelniajace' : {value: 'pokój: 230 (II piętro)'}
+                } %}
+                {% set pokoj_r = '230 (II piętro)' %}
+                {% set budynek_id_r = '5718' %} {# Rektorat #}
+                {% set nodeAdres_r = drupal_entity('node', 5718, 'budynek_krotki_adres') %}
+                {% set nodeObj_r = nodeAdres_r['#node'] %}
+                {#                {{ kint(nodeObj_r) }} #}
+                {% set adres_r = nodeObj_r.field_adres_budynku.0 %}
+
+                <h3>{{ 'Recruitment Office' | t }}</h3>
+                {% include '@ug_theme/content/mapy/tpl_adres_krotki_z_mapa.html.twig'
+                    with  {'adres': adres_r, 'pokoj': pokoj_r, 'tel_mail': tel_mail_r, 'budynek_id' : budynek_id_r, 'id_map': 'br', 'collapse': 1} %}
+
+
+                {#                <h3>Biuro Rekrutacji</h3> #}
+                {#                <p>ul. Jana Bażyńskiego 8 <br/> #}
+                {#                    80-309 Gdańsk <br/> #}
+                {#                    telefon: 58 523 23 32 <br/> #}
+                {#                    e-mail: rekrutacja@ug.edu.pl <br/> #}
+                {#                    pokój: 228, 229 (II piętro)</p> #}
+            </div>
+        </div>
+        {# Adres do komisji rekrutacyjnej - brany z paragraphu terminy_rekrutacji_dokt #}
+        {% if node.field_terminy_rekrutacji_dokt.entity | length > 0 %}
+            {% set terminy = node.field_terminy_rekrutacji_dokt.entity %}
+            {% if (terminy.field_adres_komisji_budynek | length > 0) or (terminy.field_adres_komisji_telefon_mail | length > 0) %}
+
+                <div class="col-md-6 col-sm-12 d-flex">
+                    <div class="shadow p-3 w-100 h-100">
+{#                        <h3>Komisja Rekrutacyjna</h3>#}
+                        <h3>{{ 'Admissions Committee' | t }}</h3>
+
+                        {% set komisja = node.field_terminy_rekrutacji_dokt.entity %}
+                        {% set budynek_komisja = komisja.field_adres_komisji_budynek.entity %}
+                        {% if budynek_komisja and budynek_komisja.field_adres_budynku.value %}
+                            {% set adres_komisja = budynek_komisja.field_adres_budynku %}{% else %}{% set adres_komisja = null %}
+                        {% endif %}
+                        {% set tel_mail = komisja.field_adres_komisji_telefon_mail.entity %}
+                        {% set pokoj = komisja.field_adres_komisji_pokoj.value %}
+                        {% include '@ug_theme/content/mapy/tpl_adres_krotki_z_mapa.html.twig'
+                            with  {'adres': adres_komisja, 'pokoj': pokoj, 'tel_mail': tel_mail, 'budynek_id' : budynek_komisja.nid.value, 'id_map': 'komisja', 'collapse': 1} %}
+
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h3 class="mt-5 mb-4">{{ node.title.value }}</h3>
+                        {# kontakt do SD #}
+            <div class="row">
+                {% if content.field_kierownik_szkoly_doktorski %}
+                    <div class="col-md-6 col-sm-12 d-flex">
+                            {# kontakt do kierownika #}
+                        <div class="shadow p-3 w-100 h-100">
+                            <h4>{{ 'Director of the Doctoral School' | t }}</h4>
+{#                            <h4>Kierownik szkoły doktorskiej</h4>#}
+                            {#                        patrz: paragraph--osoba-szkoly-doktorskie.html.twig #}
+                            {{ content.field_kierownik_szkoly_doktorski }}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if node.field_kontakt_z_biurem | length > 0 %}
+                    <div class="col-md-6 col-sm-12 d-flex">{# kontakt do obsługi administracyjnej SD #}
+                        <div class="shadow p-3 w-100 h-100">
+                            <h4>{{ 'Administrative Office' | t }}</h4>
+{#                            <h4>Obsługa administracyjna</h4>#}
+                            {% set adres_budynku = node.field_mapa__adres_wydzialu.entity.field_adres_budynku %}
+
+                            {% set budynek_id = node.field_mapa__adres_wydzialu.entity.id() %}
+
+
+
+                            {% if node.field_kontakt_z_biurem | length > 0 %}
+                                {% for kontakt in node.field_kontakt_z_biurem %}
+                                    {#                                {% include '@ug_theme/content/mapy/tpl_tel_email.html.twig' with #}
+                                    {% include '@ug_theme/content/mapy/tpl_adres_krotki_z_mapa.html.twig' with
+                                        {'tel_mail': kontakt.entity, 'budynek_id': budynek_id, 'adres_budynku': adres_budynku, 'id_map': 'biuro', 'collapse': 1} %}
+                                {% endfor %}
+                            {% endif %}
+                            {#                        {% endfor %} #}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+                        {% if (node.field_strona_www.0 | length > 0) %}
+            <div class="row">
+                <div class="col-12 mt-3"> {# strona WWW #}
+                    <div class="shadow p-3">
+                            <span class="fs-4">{{ 'Website' | t}}: <a
+                                        href="{{ node.field_strona_www.0.uri }}"
+                                        class="fs-4">{{ node.field_strona_www.0.title ?: node.field_strona_www.0.uri | replace({'https://': ''}) }}</a></span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{# Niżej: ŚCIĄGNIĘTE Z KIERUNKÓW! #}
+
+{# <article{{ attributes.addClass(classes) }}> #}
+{#  <header> #}
+{#    {{ title_prefix }} #}
+{#    {% if label and not page %} #}
+{#      <h2{{ title_attributes.addClass('node__title') }}> #}
+{#        <a href="{{ url }}" rel="bookmark">{{ label }}</a> #}
+{#      </h2> #}
+{#    {% endif %} #}
+{#    {{ title_suffix }} #}
+
+{#  </header> #}
+{#  <div{{ content_attributes.addClass('node__content', 'clearfix') }}> #}
+
+
+{#    <div class="container py-5"> #}
+
+
+
+
+
+
+
+{#  </div> #}
+{# </article> #}
+
+
+{# <div class="container py-5"> #}
+{#  <div class="col-md-12 "> #}
+{#    <section class=" mb-4 rounded-0 hero p-0 bg-light"> #}
+{#      <div class="row py-0 ps-4"> #}
+{#        <div class="col-md-7 d-flex justify-content-center flex-column py-4"> #}
+{#          #}{#                        <h1 class="display-5">{{ label }}</h1> #}
+{#          <h1 class="display-5">{{ node.field_kierunek.value }}</h1> #}
+{#          <p class="fs-3 text-dark fw-bold"> #}
+{#            Studia {{ content.field_stopien[0]['#markup'] }}<br/> #}
+{#            <span class="fs-4 text-dark fw-bold">{{ content.field_tryb[0]['#markup'] }}</span> #}
+{#            </span> #}
+{#            #}{#                        <p class="fs-2 text-dark fw-bold">{{ content.field_tryb }}</p> #}
+{#          <p class="col-md-8 fs-6 mb-4 fst-italic"> #}
+{#            Rok akademicki: {{ node.field_rok_rekrutacji.value | replace({'-': '/'}) }} #}
+{#          </p> #}
+{#          <p class="col-md-8 fs-5 mb-4"> #}
+{#            #}{#                            <a href="{{ path('entity.taxonomy_term.canonical', {'taxonomy_term': node.field_wydzial.entity.tid.value}) }}"> #}
+{#            {{ node.field_wydzial.entity.name.value }} #}
+{#            #}{#                            </a> #}
+{#          </p> #}
+{#        </div> #}
+{#        <div class="col-md-5 p-0"> #}
+{#          <img src="{{ node.field_logo['0'].entity.uri.value | image_style('kierunek_1200x800') }}" #}
+{#               alt="{{ node.field_logo[0].alt }}" #}
+{#               class="img-fluid" /> #}
+{#        </div> #}
+
+{#        {% if content.field_cel_studiow is not empty %} #}
+{#          <h3 class="pb-3">Cel studiów</h3> #}
+{#          {{ content.field_cel_studiow.field_cel_studiow_podypl }} #}
+{#        {% endif %} #}
+
+
+{#        {% if content.czas_trwania is not empty %} #}
+{#          <h3 class="pb-3">Czas trwania i forma studiów</h3> #}
+{#            {% if content.czas_trwania is not empty %} #}
+{#              <h4 class="pb-3">Czas trwania studiów</h4> #}
+{#              {{ content.czas_trwania.field_czas_trwania_podypl }} #}
+{#            {% endif %} #}
+{#            {% if content.czas_trwania is not empty %} #}
+{#              <h4 class="pb-3">Sposób realizacji zajęć #}
+{#              </h4> #}
+{#              {{ content.czas_trwania.field_czas_trwania_podypl }} #}
+{#            {% endif %} #}
+{#            {% if content.czas_trwania.strona_www is not empty %} #}
+{#              <h4 class="pb-3">Forma studiów i częstotliwość zjazdów</h4> #}
+{#              {{ content.strona_www.field_strona_www }} #}
+{#            {% endif %} #}
+{#        {% endif %} #}
+
+{#        {% if content.czas_trwania.strona_www is not empty %} #}
+{#              <h4 class="pb-3">Forma studiów i częstotliwość zjazdów</h4> #}
+{#              {{ content.strona_www.field_strona_www }} #}
+{#            {% endif %} #}
+{#      </div> #}
+{#    </section> #}
+{#    <section class="py-4"> #}
+{#      <div class="row"> #}
+{#        <div class="col-12"> #}
+{#          <ul class="nav flex-column"> #}
+{#            <li class=" py-2"> #}
+{#              <a class="nav-link read_more" href="#1">O studiach</a> #}
+{#            </li> #}
+{#            <li class="py-2"> #}
+{#              <a class="nav-link read_more" href="#2">Organizacja studiów podyplomowych	</a> #}
+{#            </li> #}
+{#            <li class=" py-2"> #}
+{#              <a class="nav-link read_more" href="#3">Sylwetka absolwenta</a> #}
+{#            </li> #}
+{#            <li class=" py-2"> #}
+{#              <a class="nav-link read_more" href="#4">Opłaty</a> #}
+{#            </li> #}
+{#            <li class=" py-2"> #}
+{#              <a class="nav-link read_more" href="#5">Rekrutacja</a> #}
+{#            </li> #}
+{#            <li class=" py-2"> #}
+{#              <a class="nav-link read_more" href="#6">Kadra</a> #}
+{#            </li> #}
+{#            <li class=" py-2"> #}
+{#              <a class="nav-link read_more" href="#7">Kontakt</a> #}
+{#            </li> #}
+{#          </ul> #}
+{#        </div> #}
+{#      </div> #}
+{#    </section> #}
+{#    <section id="1" class="py-4 mt-4 border-top"> #}
+{#      <div class="row g-4"> #}
+{#        <div class="col-12"> #}
+{#          <h2 class="underline">O studiach</h2> #}
+{#        </div> #}
+{#        <div class="mx-auto d-flex  justify-content-center flex-column "> #}
+
+
+
+{#        </div> #}
+{#      </div> #}
+{#    </section> #}
+{#    <section id="2" class="py-4 mt-4 border-top"> #}
+{#      <div class="row"> #}
+{#        <div class="col-12"> #}
+{#          <h2 class="underline">Kryteria przyjęć</h2> #}
+{#          {{ drupal_field('field_kryteria_przyjec', 'node', node.id, 'full') }} #}
+
+{#          {% if node.langcode == 'en' %} #}
+{#            {% set url = 'https://en.ug.edu.pl/incoming_students/candidates/bachelors_and_masters_courses/fees/tuition_fees' %} #}
+{#            <a href="{{ url }}">Recruitment fee and tuition fees.</a>'; #}
+{#          {% else %} #}
+{#            {% set url='https://ug.edu.pl/rekrutacja/studia_i_i_ii_stopnia_oraz_jednolite_magisterskie/akty_prawne/uchwala_rekrutacyjna'  %} #}
+{#            <a href="{{ url }}">Przejdź do Uchwały Senatu Uniwersytetu Gdańskiego w sprawie warunków i trybu rekrutacji kandydatów na studia stacjonarne i niestacjonarne w Uniwersytecie Gdańskim.</a> #}
+{#          {% endif %} #}
+
+
+{#          #}{#                        {{ drupal_field('field_kryteria_przyj_', 'node', node.id, 'full') }} #}
+{#          {{ drupal_field('field_zalacznik', 'node', node.id, 'full') }} #}
+{#        </div> #}
+{#      </div> #}
+{#    </section> #}
+{#    <section id="3" class="py-4 mt-4 border-top"> #}
+{#      <div class="row g-4"> #}
+{#        <div class="col-12"> #}
+{#          <h2 class="underline">Limity przyjeć i progi punktowe</h2> #}
+{#        </div> #}
+{#        <div class="col-12"> #}
+{#          {%  if node.field_limit_zostanie_podany.value %}{{ drupal_field('field_limit_zostanie_podany', 'node', node.id, 'full') }}{% endif %} #}
+{#          {%  if node.field_nazwa_rekrutacji %}<h3>{{ node.field_nazwa_rekrutacji.value }}</h3>{% endif %} #}
+{#          {%  if node.field_limit_przyjec.value %}<p>{{  'General student place limit*:' | t }}{{ drupal_field('field_limit_przyjec', 'node', node.id, 'full') }}</p>{% endif %} #}
+
+{#          {%  if node.field_limit_kolejny_kier_stacjon.value %}<p>{{  '* including Student place limit for students following a second course of full-time day studies at a public institution '| t }}{{ drupal_field('field_limit_kolejny_kier_stacjon', 'node', node.id, 'full') }}<p>{% endif %} #}
+
+{#            #}{# dla studiów niestacjonarnych #}
+{#            {%  if node.field_limit_przyj_studia_niestac.value %} #}
+{#          <p><span id="limit_przyj_studia_niestac">{{'Limit ogółem:' | t }}</span> #}
+{#          <span aria-labelledby="limit_przyj_studia_niestac"><b>{{ node.field_limit_przyj_studia_niestac.value  }}</b></span> #}
+{#          #}{#                        {{ drupal_field('field_limit_przyj_studia_niestac', 'node', node.id, 'full') }} #}
+{#          </p>{% endif %} #}
+{#          #}{#  general student place limit (Oryginał: Limit przyjęć studia niestacjonarne) #}
+{#          #}
+
+{#          #}{# Paragraph - limity w dodatkowych rekrutacjach #}
+{#          {% if node.field_limity_przyjec | length > 0 %} #}
+{#            <h3 class="pt-4 pb-3">Limity przyjęć w dodatkowych rekrutacjach</h3> #}
+{#            #}{#                                {{ node.field_limity_przyjec }} #}
+{#            {% for item in node.field_limity_przyjec %} #}
+{#              {{ drupal_entity('paragraph', item.target_id) }} #}
+{#            {% endfor %} #}
+{#            #}{#                                {{ drupal_field('field_limity_przyjec', 'node', node.id, 'full') }} #}
+{#          {% endif %} #}
+{#          #}{# link limity i progi historyczne #}
+{#          {% if node.langcode == 'pl' %} #}
+{#            {% set url='https://ug.edu.pl/rekrutacja/studia_i_i_ii_stopnia_oraz_jednolite_magisterskie/niezbednik_kandydata/progi_punktowe_i_liczba_kandydatow_na_miejsce' %} #}
+{#            <p><a href="{{ url }}">Liczba miejsc i progi punktowe w latach ubiegłych</a></p> #}
+
+{#            {%  if node.field_limit_kolejny_kier_stacjon.value %} #}
+{#              {% set url='http://ug.edu.pl/rekrutacja/studia_i_i_ii_stopnia_oraz_jednolite_magisterskie/niezbednik_kandydata/kolejny_kierunek_studiow_stacjonarnych' %} #}
+{#              <p><a href="{{ url }}">Kolejny kierunek studiów stacjonarnych</a></p>'; #}
+{#            {% endif %} #}
+{#          {% endif %} #}
+
+{#          #}{#                        {%  if field_limity_przyjec.value %}{{ drupal_field('field_limity_przyjec', 'node', node.id, 'full') }}<p>{% endif %} #}
+{#          {%  if node.field_uwagi.value %}{{ drupal_field('field_uwagi', 'node', node.id, 'full') }}{% endif %} #}
+
+{#        </div> #}
+{#      </div> #}
+{#    </section> #}
+{#    <section id="4" class="py-4 mt-4 border-top"> #}
+{#      <div class="row g-4"> #}
+{#        <div class="col-12"> #}
+{#          <h2 class="underline">Wymagane dokumenty</h2> #}
+{#        </div> #}
+{#        <div class="col-12"> #}
+{#          {{ drupal_field('field_', 'node', node.id, 'full') }} #}
+{#          {% if node.langcode == 'en' %} #}
+{#            <a href="https://en.ug.edu.pl/incoming_students/candidates/bachelors_and_masters_courses/required_documents"> #}
+{#              Necessary documents for Bachelor's degree and Master's degree.</a> #}
+{#          {% else %} #}
+{#            {% #}
+{#              set url_dokumenty = 'http://ug.edu.pl/rekrutacja/studia_i_i_ii_stopnia_oraz_jednolite_magisterskie/niezbednik_kandydata/dokumenty' #}
+{#            %} #}
+{#            <a href="{{ url }}">Dokumenty uprawniające do podjęcia studiów</a> #}
+{#          {% endif %} #}
+{#        </div> #}
+{#      </div> #}
+{#    </section> #}
+{#    <section id="5" class="py-4 mt-4 border-top"> #}
+{#      <div class="row g-4"> #}
+{#        <div class="col-12"> #}
+{#          <h2 class="underline">Terminy rekrutacji</h2> #}
+{#        </div> #}
+{#        <div class="col-12"> #}
+
+{#          {% if node.field_terminy_rekrutacji | length > 0 %} #}
+{#            {% for item in node.field_terminy_rekrutacji %} #}
+{#              {{ drupal_entity('paragraph', item.target_id) }} #}
+{#            {% endfor %} #}
+{#          {% else %} #}
+{#            {{ 'Terminy rekrutacji zostaną podane w terminie późniejszym.' | t }} #}
+{#          {% endif %} #}
+{#        </div> #}
+{#      </div> #}
+{#    </section> #}
+{#    <section id="6" class="py-4 mt-4 border-top"> #}
+{#      <div class="row g-4"> #}
+{#        <div class="col-12"> #}
+{#          <h2 class="underline">Opłaty</h2> #}
+{#        </div> #}
+{#        <div class="col-12"> #}
+{#          {% if node.langcode == 'en' %} #}
+{#            {% set url = 'https://en.ug.edu.pl/incoming_students/candidates/bachelors_and_masters_courses/fees/tuition_fees' %} #}
+{#            <a href="{{ url }}">Recruitment fee and tuition fees.</a>'; #}
+{#          {% else %} #}
+{#            {% set url_kandydaci = 'https://ug.edu.pl/rekrutacja/studia_i_i_ii_stopnia_oraz_jednolite_magisterskie/niezbednik_kandydata/oplata_rekrutacyjna' %} #}
+{#            {% set url_przyjeci = 'https://ug.edu.pl/rekrutacja/studia_i_i_ii_stopnia_oraz_jednolite_magisterskie/niezbednik_osoby_przyjetej_na_studia/oplaty_za_studia' %} #}
+{#            Informacja na temat opłaty rekrutacyjnej oraz opłat za studia #}
+{#            <ul> #}
+{#              <li><a href="{{ url_kandydaci }}">opłata rekrutacyjna</a></li> #}
+{#              <li><a href="{{ url_przyjeci }}">opłaty za studia </a></li> #}
+{#            </ul> #}
+{#          {% endif %} #}
+{#        </div> #}
+{#      </div> #}
+{#    </section> #}
+{#  </div> #}
+{# </div> #}
+</div>

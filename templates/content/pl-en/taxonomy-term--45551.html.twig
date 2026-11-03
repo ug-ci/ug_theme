@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+
+ *
+  PL: Szkoły doktorskie - Ekonomia - limity przyjęć
+  EN: SZKOŁY DOKTORSKIE - Ekonomia - kontakt
+ * @see template_preprocess_taxonomy_term()
+ *
+ * Kopia z:
+ - bootstrap_barrio/templates/content/taxonomy-term.html.twig
+ - ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig
+ *
+ */
+#}
+{% set classes = [
+    'taxonomy-term',
+    'vocabulary-' ~ term.bundle|clean_class,
+] %}
+{% extends "@ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig" %}
+
+{% block blockbefore %}
+    {% if language == 'en' %}
+        {# wersja en:  Szkoła doktorska Ekonomia - kontakt #}
+        {{ include('@ug_theme/includes/sd_details.html.twig',  {nid: '107339', mode: 'kontakt'}  ) }}
+    {% elseif language == 'pl' %}
+        {# wersja PL: SD Ekonomia - limity przyjęć #}
+        {{ drupal_entity('node', '123693', 'szkoly_doktorskie_limity_przyjec') }}
+    {% endif %}
+{% endblock %}

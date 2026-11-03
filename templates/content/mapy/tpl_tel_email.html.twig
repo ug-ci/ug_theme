@@ -1,0 +1,71 @@
+{#
+/**
+ * @file
+ * Default theme implementation for displaying tel and email.
+ *
+ * Available variables:
+ * - tel_mail: Array of tel and email.
+ *   - field_nazwa_kontaktu: Name of contact.
+ *   - field_telefon: Phone number.
+ *   - field_email: Email.
+ *
+ * @see template_preprocess()
+ *
+ * @ingroup themeable
+ */
+#}
+
+
+
+{% if tel_mail %}
+    <div>
+        {% if tel_mail.field_nazwa_kontaktu.value | length > 0 %}
+            <div class="d-flex align-items-center mt-1 mb-2">
+                <b>{{ tel_mail.field_nazwa_kontaktu.value }}</b>
+            </div>
+        {% endif %}
+        {% if tel_mail.field_telefon.value | length > 0 %}
+            <div class="d-flex align-items-center mt-1 mb-2">
+                <div class="material-icons fs-4 text-primary align-items-center">phone</div>
+                <div class="card-text px-3">
+                    {% for telefon in tel_mail.field_telefon %}
+                        <a href="tel:{{ telefon.value | replace({' ': ''}) }}">{{ telefon.value }}</a>
+                        {% if not(loop.last) %}<br/>{% endif %}
+                    {% endfor %}
+
+{#                    <a href="tel:{{ tel_mail.field_telefon.value  | replace({' ': ''}) }}">{{ tel_mail.field_telefon.value }}</a>#}
+                </div>
+            </div>
+        {% endif %}
+        {% if tel_mail.field_fax.value | length > 0 %}
+            <div class="d-flex align-items-center mt-1 mb-2">
+                <div class="material-icons fs-4 text-primary align-items-center">fax</div>
+                <div class="card-text px-3">
+                    {% for fax in tel_mail.field_fax %}
+                        <a href="tel:{{ fax.value | replace({' ': ''}) }}">{{ fax.value }}</a>
+                        {% if not(loop.last) %}<br/>{% endif %}
+                    {% endfor %}
+
+                    {#                    <a href="tel:{{ tel_mail.field_telefon.value  | replace({' ': ''}) }}">{{ tel_mail.field_telefon.value }}</a>#}
+                </div>
+            </div>
+        {% endif %}
+        {% if tel_mail.field_email.value | length > 0 %}
+            <div class="d-flex align-items-center mb-2">
+                <div class="material-icons fs-4 text-primary align-items-center">mail</div>
+                <div class="card-text px-3">
+                    {% for item in tel_mail.field_email %}
+                        <a href="mailto:{{ item.value }}">{{ item.value }}</a>
+                        {% if not(loop.last) %}<br/>{% endif %}
+                    {% endfor %}
+{#                    <a href="tel:{{ tel_mail.field_email.value }}">{{ tel_mail.field_email.value }}</a>#}
+                </div>
+            </div>
+        {% endif %}
+        {% if tel_mail.field_informacje_uzupelniajace %}
+            <div class=" mb-1 mt-4">
+                {{ tel_mail.field_informacje_uzupelniajace.processed }}
+            </div>
+        {% endif %}
+    </div>
+{% endif %}

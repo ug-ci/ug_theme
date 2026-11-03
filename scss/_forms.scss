@@ -1,0 +1,42 @@
+.webform-submission-form fieldset {
+
+    span.fieldset-legend {
+        font-size: 18px !important;
+        font-weight: 600 !important;
+        color: $secondary !important;
+    }
+
+    .form-control {
+        border: 1px solid gray !important;
+    }
+
+    .form-control:focus {
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 2px $primary !important;
+    }
+
+    .was-validated .form-control:invalid,
+    .form-control.is-invalid {
+        border: 2px solid red !important;
+    }
+
+    .ui-widget-header {
+        background: $pure-white !important;
+        border: 0px;
+    }
+
+    .ui-dialog-title {
+        font-size: 2rem !important;
+    }
+
+
+    .row-flex {
+        .webform-section-wrapper {
+            display: flex;
+
+            .col-md-2 {
+                padding-right: 20px;
+            }
+        }
+    }
+
+}

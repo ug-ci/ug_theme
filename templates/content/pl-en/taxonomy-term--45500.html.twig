@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ EN: SZKOŁY DOKTORSKIE - Biotech EN - zasady rekrutacji
+ PL: SZKOŁY DOKTORSKIE - Biotech EN - kontakt
+ * @see template_preprocess_taxonomy_term()
+ *
+ * Kopia z:
+ - bootstrap_barrio/templates/content/taxonomy-term.html.twig
+ - ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig
+ *
+ */
+#}
+{% set classes = [
+    'taxonomy-term',
+    'vocabulary-' ~ term.bundle|clean_class,
+] %}
+{% extends "@ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig" %}
+{% block blockbefore %}
+    {% if language == 'en' %}
+        {# wersja en:  Szkoła doktorska ABC - zasady rekrutacji #}
+        {{ include('@ug_theme/includes/sd_details.html.twig',  {nid: '107336', mode: 'zasady'}  ) }}
+    {% elseif language == 'en' %}
+        {# wersja pl: SD Biotech - kontakt #}
+        {{ drupal_entity('node', '107336', 'szkoly_doktorskie_kontakt') }}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,273 @@
+// Treść — bloki wizualizacji, galeria, rejestr zmian, komunikaty, pola węzła
+
+#block-ug-theme-content .wizualizacje {
+  position: relative;
+  display: block;
+  padding: 10px 25px;
+  text-transform: uppercase;
+  color: $pure-white !important;
+  background-color: #0041d2;
+  width: 295px;
+  transition: 0.15s;
+}
+
+#block-ug-theme-content .pliki {
+  width: 210px;
+}
+
+#block-ug-theme-content .identyfikacja {
+  width: 353px;
+}
+
+#block-ug-theme-content .wizualizacje:hover {
+  color: $pure-white !important;
+  background-color: #1534a6;
+}
+
+#block-ug-theme-content .wizualizacje::after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 15px;
+  width: 51px;
+  height: 11px;
+  background-image: url("/themes/ug_theme/images/arrow-more-right-state.svg");
+  background-repeat: no-repeat;
+  transition: 0.15s;
+  transition-delay: 0.08s;
+  filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(62deg) brightness(109%) contrast(101%);
+}
+
+#block-ug-theme-content .wizualizacje:hover::after {
+  content: "";
+  display: flex;
+  background-image: url("/themes/ug_theme/images/arrow-more-right-hover.svg");
+  width: 51px;
+  height: 11px;
+  background-repeat: no-repeat;
+  transition: 0.15s;
+  transition-delay: 0.08s;
+  filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(62deg) brightness(109%) contrast(101%);
+  color: $pure-white !important;
+}
+
+/*TOP BTN*/
+a.top-arrow-btn {
+  display: none;
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  padding: 10px;
+  background-color: #052d73;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+a.top-arrow-btn img {
+  position: relative;
+  top: -1.4px;
+  width: 30px;
+  height: auto;
+}
+
+@media screen and (min-width: 760px) {
+  a.top-arrow-btn {
+    padding: 12px;
+  }
+
+  a.top-arrow-btn img {
+    width: 37px;
+  }
+}
+/* GALERIA*/
+.field--name-field-zdjecia,
+.field--name-field-zdjecie {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.field--name-field-zdjecia .field__item,
+.field--name-field-zdjecie .field__item {
+  padding-right: 30px;
+  padding-bottom: 15px;
+}
+
+.field--name-field-naglowek-galerii-zdjec {
+  margin-bottom: 24px;
+  color: #0041d2;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* REJESTR ZMIAN */
+.node__meta {
+  margin-bottom: 20px;
+}
+
+.node__meta span {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+.toggle_record {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.toggle_record-box {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-right: 6.5px;
+  margin-bottom: 15px;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #e3e3e3;
+}
+
+.toggle_record-box-line {
+  background-color: #9c9c9c;
+}
+
+.toggle_record-box-one {
+  width: 80%;
+  height: 2px;
+}
+
+.toggle_record-box-two {
+  position: absolute;
+  height: 80%;
+  width: 2px;
+}
+
+.toggle_record span {
+  color: #676767;
+}
+
+.toggle_record-link {
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+/* .toggle_record-text:hover {
+    color: #0d6efd;
+  }
+  .toggle_record-link:hover .toggle_record-box-line {
+    background-color: #0d6efd !important;
+  } */
+.toggle_record:hover .toggle_record-box-line {
+  background-color: #0d6efd !important;
+}
+
+.toggle_record:hover .toggle_record-text {
+  color: #0d6efd;
+}
+
+hr {
+  margin-bottom: 10px;
+}
+
+.toggle_record-description {
+  opacity: 0;
+  -webkit-transform: translateY(-20px);
+  transform: translateY(-20px);
+  -webkit-transition:
+    opacity 0.1s 0.1s ease-out,
+    -webkit-transform 0.3s ease-in-out;
+  transition:
+    transform 0.3s ease-in-out,
+    opacity 0.1s 0.1s ease-out,
+    -webkit-transform 0.3s ease-in-out;
+}
+
+.toggle_record-active {
+  -webkit-transform: translateY(0px);
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.toggle_record-hide {
+  display: none;
+}
+
+/* DATA PUBLIKACJI - KOMUNIKATY */
+.field--name-field-publish-date {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.field--name-field-publish-date .field__label {
+  margin-right: 10px;
+}
+
+/*.content h1 {*/
+/*  font-weight: bold;*/
+/*  font-size: 30px;*/
+/*}*/
+/*KOMUNIKATY*/
+.komunikaty .views-row {
+  position: relative;
+  margin-top: 40px;
+  width: 80%;
+}
+
+.komunikaty .views-row::after {
+  position: absolute;
+  content: "";
+  left: calc(var(--bs-gutter-x) * 0.5);
+  right: calc(var(--bs-gutter-x) * 0.5);
+  bottom: -20px;
+  height: 1px;
+  background-color: #0041d2;
+}
+
+.komunikaty .views-field-field-publish-date .field-content {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.komunikaty .field-content a {
+  color: #0041d2 !important;
+  font-weight: 600;
+}
+
+.komunikaty .field-content a:hover {
+  color: #0034a7 !important;
+}
+
+.komunikaty nav {
+  margin-top: 50px;
+  margin-bottom: 15px;
+}
+
+.komunikaty nav .page-link {
+  color: #0041d2;
+}
+
+.komunikaty nav .page-link:hover {
+  color: #0034a7;
+}
+
+.komunikaty nav .active .page-link {
+  color: white;
+}
+.node .field--name-field-images {
+  width: 100%;
+}
+
+.node--view-mode-node-bez-tytulu h2.node__title {
+  display: none;
+}

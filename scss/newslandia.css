@@ -1,0 +1,261 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
+.news-page .news-page-img img {
+  box-shadow: insert 0px 0px 3px silver;
+}
+
+.node--type-news .paragraph--view-mode--default p:first-of-type {
+  font-weight: normal !important;
+  margin-bottom: 2rem;
+}
+
+.node--type-news .paragraph--view-mode--default p:first-of-type strong {
+  font-size: 1.3rem;
+  line-height: 1.5;
+  font-weight: normal !important;
+  margin-bottom: 0px;
+  color: black;
+}
+
+.news-page .news-page-text {
+  margin-top: 0.5rem;
+}
+
+.view-aktualnosci .news-read-more a {
+  color: #0041d2 !important;
+  margin-top: 1rem !important;
+  font-style: initial;
+  text-transform: uppercase;
+}
+
+@media (max-width: 576px) {
+  .news-page .news-page-filed {
+    padding-top: 1rem;
+  }
+  .news-page .col-12 {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+.view-aktualnosci .news-read-more a::after {
+  content: "";
+  background: url("/themes/ug_faculty/images/arrow-more-right-state.svg");
+  background-repeat: repeat;
+  background-repeat: no-repeat;
+  background-position: center right;
+  display: inline-flex;
+  width: 53px;
+  height: 10px;
+  margin-left: 0px;
+  margin-top: 5px;
+  position: absolute;
+  transition: 0.15s;
+  transition-delay: 0s;
+}
+
+.view-aktualnosci .news-read-more a:hover::after {
+  margin-left: 5px;
+}
+
+.view-aktualnosci .news-read-more .arrow,
+aside h2::after {
+  display: none;
+}
+
+aside h2 {
+  font-size: 20px !important;
+}
+
+.view-aktualnosci .news-read-more {
+  margin-top: 1rem !important;
+  margin-bottom: 0rem;
+}
+
+.view-aktualnosci .row.mt-2.mb-5 {
+  border-top: 1px solid silver;
+  margin-bottom: 0px !important;
+  margin-top: 0px !important;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.view-aktualnosci h3.ml-3 {
+  text-transform: capitalize !important;
+}
+
+.breadcrumb {
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-top: 20px;
+  font-size: 12px;
+}
+
+.news-page .news-page-created time {
+  color: gray !important;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: initial;
+}
+
+.news-page .news-page-kateg {
+  font-size: 11px;
+  text-transform: capitalize !important;
+  font-weight: normal;
+  letter-spacing: initial;
+  background: #0041d2;
+}
+
+.news-page .news-page-title {
+  text-transform: inherit;
+  font-size: 1.5rem;
+  color: #052d73 !important;
+}
+
+.news-page .news-page-title a {
+  color: #052d73 !important;
+}
+
+.news-page .news-page-title a:hover {
+  color: #0041d2 !important;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #0041d2 !important;
+  border-color: #0041d2 !important;
+  font-weight: bold !important;
+  font-size: 14px !important;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 10px 20px !important;
+  border-radius: 0px !important;
+  transition: background-color 2s ease-out;
+}
+
+.btn-primary:hover {
+  background-color: #052d73 !important;
+  border-color: #052d73 !important;
+}
+
+.news-created time {
+  font-size: 12px;
+}
+
+.node__content * {
+  font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  text-transform: none !important;
+  color: #052d73 !important;
+  letter-spacing: inherit !important;
+}
+
+h1::first-letter,
+h2::first-letter,
+h3::first-letter,
+h4::first-letter,
+h5::first-letter {
+  text-transform: uppercase !important;
+}
+
+.text-dark, .text-dark a {
+  color: #052d73 !important;
+}
+
+.view-header h3::first-letter {
+  text-transform: uppercase !important;
+}
+
+h1 a, h2 a, h3 a, h4 a, .news4-title a {
+  letter-spacing: 1 !important;
+  color: #052d73 !important;
+}
+
+h1, h3.page-title, .node-title, .view-header h3 {
+  font-size: 35px;
+  border-bottom: 0px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+h2 {
+  font-size: 28px !important;
+}
+
+.node-title, .view-header h3, h2 {
+  display: flex !important;
+  flex-direction: column;
+}
+
+.node-title::after, .view-header h3::after, h1::after, h2::after {
+  content: "";
+  background-image: url("https://ug.edu.pl/themes/ug_theme/images/underline.svg");
+  display: block;
+  width: 82px;
+  height: 3px;
+  margin: 10px 0px 20px;
+}
+
+@media (max-width: 576px) {
+  header .navbar-toggler {
+    display: none !important;
+  }
+  .navbar-toggler {
+    border: 0px !important;
+  }
+  .kategorie-linki-blok .container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0px !important;
+  }
+}
+*, body {
+  font-family: "DM Sans", sans-serif !important;
+}
+
+.breadcrumb {
+  background: white;
+}
+
+.navbar-form {
+  margin-top: 0px;
+}
+
+.navbar-light a {
+  background: transparent !important;
+  padding: 0px;
+  font-weight: normal !important;
+  margin-left: 10px;
+}
+
+.navbar-light a:hover {
+  color: gray;
+}
+
+.navbar-light a:focus {
+  padding: 0px;
+}
+
+.highlighted {
+  background: whitesmoke !important;
+}
+
+.logo-svg {
+  height: 60px !important;
+}
+
+.site-name-slogan {
+  color: white;
+  font-size: 18px;
+  filter: none !important;
+}
+
+nav.navbar-light {
+  padding: 0px;
+}
+
+#navbar-main {
+  background: #052D73 !important;
+  border-bottom: 10px solid #35A7FA;
+}/*# sourceMappingURL=newslandia.css.map */

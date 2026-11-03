@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ EN: SZKOŁY DOKTORSKIE - Biotech EN - OPŁATY
+ PL: SZKOŁY DOKTORSKIE - Biologia - limity przyjęć
+ * @see template_preprocess_taxonomy_term()
+ *
+ * Kopia z:
+ - bootstrap_barrio/templates/content/taxonomy-term.html.twig
+ - ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig
+ *
+ */
+#}
+{% set classes = [
+    'taxonomy-term',
+    'vocabulary-' ~ term.bundle|clean_class,
+] %}
+{% extends "@ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig" %}
+
+{% block blockbefore %}
+    {% if language == 'en' %}
+        {# wersja en:  Szkoła doktorska ABC - opłaty #}
+        {{ include('@ug_theme/includes/sd_details.html.twig',  {nid: '107336', mode: 'oplaty'}  ) }}
+    {% elseif language == 'pl' %}
+        {# SD Biologia - limity przyjęć #}
+        {{ drupal_entity('node', '123691', 'szkoly_doktorskie_limity_przyjec') }}
+    {% endif %}
+{% endblock %}

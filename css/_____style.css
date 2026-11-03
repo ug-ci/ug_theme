@@ -1,0 +1,111 @@
+/**
+ * @file
+ * Subtheme specific CSS.
+ */
+body {
+  font-family: "DM Sans" !important;
+  font-size: 14px;
+  margin: 0;
+}
+
+a {
+  color: #0041d2;
+}
+
+h1, h1 span {
+  font-size: 35px;
+}
+
+h2, h2 span {
+  font-size: 30px;
+}
+
+h3, h3 span {
+  font-size: 20px;
+}
+
+h4, h4 span {
+  font-size: 18px;
+}
+
+h5, h5 span {
+  font-size: 14px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #0041d2 !important;
+  font-weight: bold;
+}
+
+h1 span, h2 span, h3 span, h4 span, h5 span, h6 span {
+  color: #0041d2;
+  font-weight: bold;
+}
+
+.container {
+  max-width: 1530px !important;
+}
+
+.sticky-top {
+  background: #052D73;
+  margin: 0px;
+  padding: 0px;
+}
+
+.navbar-collapse {
+  justify-content: flex-end;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #fff;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+  color: #fff;
+}
+
+.page__footer {
+  background: var(--granatowy);
+  color: #fff;
+}
+
+.page__footer a {
+  color: #fff;
+}
+
+.navbar-brand {
+  width: 120px;
+  margin: 35px 0px;
+}
+
+table tr th {
+  background: #F5F5F5 !important;
+  border-bottom-style: none;
+  color: #0041d2;
+}
+
+/* Tabelki */
+table {
+  width: 100% !important;
+}
+
+tr {
+  background: #fff;
+  border: 2px solid;
+}
+
+tr td {
+  border: 2px solid;
+}
+
+tr th {
+  border: 2px solid #141414;
+}
+
+tr td {
+  border-bottom: 1px solid #f5f5f5 !important;
+  border-top: 1px solid #f5f5f5 !important;
+  padding: 8px 8px;
+}
+
+/* Tabelki END */

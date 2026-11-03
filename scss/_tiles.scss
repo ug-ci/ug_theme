@@ -1,0 +1,211 @@
+// Kafle — prezentacja tytułów, działy kształcenia, matury, kariera (EN)
+
+/* PREZENTACJA TYTULY */
+.prezentacja-tytuly .view-content,
+.dzial_ksztalcenia_1,
+#views-bootstrap-matury-zagraniczne-lista-block-kafle .row {
+  display: flex;
+}
+
+.dzial_ksztalcenia_1,
+#views-bootstrap-matury-zagraniczne-lista-block-kafle .row {
+  max-width: 100%;
+}
+
+.prezentacja-tytuly .view-content .views-field,
+.dzial_ksztalcenia_1-item,
+#views-bootstrap-matury-zagraniczne-lista-block-kafle .row > div {
+  position: relative;
+  margin-bottom: 25px;
+  width: 100%;
+  height: 118px;
+  border: 2px solid #0041d2;
+}
+
+#views-bootstrap-matury-zagraniczne-lista-block-kafle .row > div {
+  max-width: 300px;
+  height: 95px;
+}
+
+#views-bootstrap-matury-zagraniczne-lista-block-kafle .row .views-field {
+  position: relative;
+  left: -11px;
+  width: 109%;
+  height: 100%;
+}
+
+.dzial_ksztalcenia_1-item,
+#views-bootstrap-matury-zagraniczne-lista-block-kafle .row > div {
+  margin-left: 10px;
+}
+
+.prezentacja-tytuly .view-content .views-field:hover,
+.dzial_ksztalcenia_1-item:hover,
+#views-bootstrap-matury-zagraniczne-lista-block-kafle .row > div:hover {
+  background-color: #0041d2;
+}
+
+.prezentacja-tytuly .view-content .views-row a,
+.dzial_ksztalcenia_1-item a {
+  /*  text-transform: lowercase; */
+  padding: 9px;
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: #0041d2;
+  font-weight: 500;
+}
+
+#views-bootstrap-matury-zagraniczne-lista-block-kafle .row div a {
+  display: block;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.dzial_ksztalcenia_1-item a {
+  text-transform: none;
+  padding: 15px;
+}
+
+.prezentacja-tytuly .view-content .views-row a::after,
+.dzial_ksztalcenia_1-item a::after,
+#views-bootstrap-matury-zagraniczne-lista-block-kafle .row div a::after {
+  content: "";
+  display: flex;
+  background-image: url("/themes/ug_theme/images/arrow-more-right-state.svg");
+  width: 51px;
+  height: 11px;
+  background-repeat: no-repeat;
+  transition: 0.15s;
+  transition-delay: 0.08s;
+  position: relative;
+  top: 10px;
+  left: 0;
+}
+
+.prezentacja-tytuly .view-content .views-row a:hover::after,
+.dzial_ksztalcenia_1-item a:hover::after,
+#views-bootstrap-matury-zagraniczne-lista-block-kafle .row div a:hover::after {
+  content: "";
+  display: flex;
+  background-image: url("/themes/ug_theme/images/arrow-more-right-hover.svg");
+  width: 51px;
+  height: 11px;
+  background-repeat: no-repeat;
+  transition: 0.15s;
+  transition-delay: 0.08s;
+  filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(62deg) brightness(109%) contrast(101%);
+}
+
+.prezentacja-tytuly .view-content .views-row a::first-letter {
+  text-transform: uppercase;
+}
+
+#block-ug-theme-content .prezentacja-tytuly .view-content .views-row a:hover,
+#block-ug-theme-content .dzial_ksztalcenia_1-item a:hover,
+#views-bootstrap-matury-zagraniczne-lista-block-kafle .row div a:hover {
+  color: $pure-white !important;
+}
+
+/* DZIAŁ KSZTAŁCENIA */
+.dzial_ksztalcenia-title {
+  color: #141414 !important;
+  margin-bottom: 10px;
+}
+
+/* EN CAREER */
+.career-title {
+  font-size: 16px;
+}
+
+.career-text,
+.career-link {
+  font-size: 14px;
+}
+
+.card-img-top {
+  height: 220px;
+  object-fit: cover;
+}
+
+.career-body {
+  position: relative;
+}
+
+@media screen and (min-width: 576px) {
+  .prezentacja-tytuly .view-content,
+  .dzial_ksztalcenia_1,
+  #views-bootstrap-matury-zagraniczne-lista-block-kafle .row {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .prezentacja-tytuly .view-content .views-row,
+  .dzial_ksztalcenia_1-item,
+  #views-bootstrap-matury-zagraniczne-lista-block-kafle .row > div {
+    width: 45% !important;
+    max-width: 400px !important;
+  }
+
+  #views-bootstrap-matury-zagraniczne-lista-block-kafle .row > div {
+    max-width: 300px !important;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .career-link {
+    position: absolute;
+    bottom: 20px;
+  }
+
+  .career-body {
+    height: 300px;
+  }
+
+  .career-first {
+    height: 430px;
+  }
+
+  .card-img-top {
+    height: 210px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .career-body {
+    height: 240px;
+  }
+
+  .career-first {
+    height: 370px;
+  }
+
+  .card-img-top {
+    height: 230px;
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  .prezentacja-tytuly .view-content .views-row a {
+    padding: 15px;
+  }
+
+  #views-bootstrap-matury-zagraniczne-lista-block-kafle .row > div {
+    margin-right: 10px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .career-first,
+  .career-third {
+    height: 370px;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .career-first,
+  .career-third {
+    height: 330px;
+  }
+}

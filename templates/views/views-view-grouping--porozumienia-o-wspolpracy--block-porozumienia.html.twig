@@ -1,0 +1,37 @@
+{#
+/**
+ * @file
+ * Theme override to display a single views grouping.
+ *
+ * Available variables:
+ * - view: The view object.
+ * - grouping: The grouping instruction.
+ * - grouping_level: A number indicating the hierarchical level of the grouping.
+ * - title: The group heading.
+ * - content: The content to be grouped.
+ * - rows: The rows returned from the view.
+ *
+ * @see template_preprocess_views_view_grouping()
+ */
+#}
+
+{% if grouping_level == 0 %}
+<section class="pt-5" id="{{ title | replace({' ': '-', ' ' : '' , 'Płn.': '', 'Płd.' : '-poludniowa'} ) | lower | striptags | trim}}">
+  <div class="container globe">
+    <h2 class="pb-4">{{ title }}
+    </h2>
+
+    <div class="row bg-dark text-white d-none d-lg-flex">
+      <div class="col-12 col-md-3 ">Nazwa
+      </div>
+      <div class="col-12 col-md-2 ">Kraj
+      </div>
+      <div class="col-12 col-md-1 ">Rok
+      </div>
+      <div class="col ">Wydział
+      </div>
+    </div>
+      {{ content }}
+  </div>
+</section>
+{% endif %}

@@ -1,0 +1,331 @@
+
+body {
+    color: #141414 !important;
+    counter-reset: list;
+}
+
+.ramka {
+    font-size: 1.3rem;
+    text-align: left;
+    margin: 2rem 0;
+    list-style-type: none;
+    background-color: #fff;
+    border-left: 6px solid var(--color-UG);
+    padding: 0.4rem 2.65rem;
+}
+
+/* TLO KOLOR */
+
+.color_Biotechnologia_tlo {
+    background-color: #da251d;
+    color: white;
+}
+
+.color_Biologia_tlo {
+    background-color: #00923f;
+    color: white;
+}
+
+.color_Chemia_tlo {
+    background-color: #b3a514;
+    color: white;
+}
+
+.color_Ekonomiczny_tlo {
+    background-color: #005e97;
+    color: white;
+}
+
+.color_Filologia_tlo {
+    background-color: #222d7c;
+    color: white;
+}
+
+.color_Historyczny_tlo {
+    background-color: #e77817;
+    color: white;
+}
+
+.color_MFiI_tlo {
+    background-color: #9198a1;
+    color: white;
+}
+
+.color_OiG_tlo {
+    background-color: #df9a0d;
+    color: white;
+}
+
+.color_PiA_tlo {
+    background-color: #501a70;
+    color: white;
+}
+
+.color_WNS_tlo {
+    background-color: #902a49;
+    color: white;
+}
+
+.color_Zarzadzania_tlo {
+    background-color: #27552b;
+    color: white;
+}
+
+/*TEKST KOLOR*/
+
+.color_UG {
+    color: var(--color-UG);
+}
+
+.color_Biotechnologia {
+    color: #da251d;
+}
+
+.color_Biologia {
+    color: #00923f;
+}
+
+.color_Chemia {
+    color: #b3a514;
+}
+
+.color_Ekonomiczny {
+    color: #005e97;
+}
+
+.color_Filologia {
+    color: #222d7c;
+}
+
+.color_Historyczny {
+    color: #e77817;
+}
+
+.color_MFiI {
+    color: #9198a1;
+}
+
+.color_OiG {
+    color: #df9a0d;
+}
+
+.color_PiA {
+    color: #501a70;
+}
+
+.color_WNS {
+    color: #902a49;
+}
+
+.color_Zarzadzania {
+    color: #27552b;
+}
+
+.wyroznienie1 {
+    color: #C6221A;
+}
+
+.wyroznienie2 {
+    color: #758C26;
+}
+
+.wyroznienie3 {
+    color: #fd9f00;
+}
+
+.wyroznienie4 {
+    color: #0CB0E0;
+}
+
+.szary {
+    color: #676767;
+}
+
+
+/* PODPIS */
+
+.podpis {
+    text-align: center;
+    float: left;
+    margin-left: 60%;
+    font-style: italic;
+}
+
+/* KAPITALIKI */
+
+.kapitaliki {
+    font-variant: small-caps;
+}
+
+/* LISTA */
+
+.squares {
+    list-style-type: none;
+    list-style-position: inside;
+    padding-left: 0;
+}
+
+.squares li {
+    margin: 0 0 6.5px 0;
+    padding: 0;
+    line-height: 1;
+}
+
+.squares li::before {
+    content: "\2219" !important;
+    color: var(--color-UG);
+    font-size: 3.2em;
+    display: inline-block;
+    font-weight: bold;
+    margin: 0;
+    width: 0.5em;
+    line-height: 0.2em;
+    vertical-align: middle;
+    margin-bottom: .07em;
+}
+
+.circles {
+    list-style-type: none;
+}
+
+.circles li {
+    text-indent: -1.5em;
+    margin: 6.5px auto;
+}
+
+.circles li::before {
+    text-indent: 0em;
+    display: inline-block;
+    counter-increment: list;
+    content: counter(list,decimal);
+    margin-right: 13px;
+    width: 1.6em;
+    height: 1.6em;
+    line-height: 1.6em;
+    text-align: center;
+    vertical-align: 3px;
+    background-color: var(--color-UG);
+    color: #fff;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    font-weight: bold;
+}
+
+/* Tabelki */
+
+table {
+	width: 100% !important;
+}
+
+tbody tr:first-child {
+    color: var(--color-UG);
+}
+
+table thead th {
+	border: solid 1px #141414;
+}
+
+table tr th {
+	background: #f5f5f5 !important;
+	border-bottom-style: none;
+	color: var(--color-UG);
+}
+
+table tr {
+	background: #fff;
+	border: 1px solid;
+}
+
+table tr,
+table td {
+	border: 1px solid #141414;
+	padding: 15px;
+}
+
+table tr,
+table th {
+	border: 1px solid #141414;
+	padding: 15px;
+}
+
+table tr,
+table td {
+	border-bottom: 1px solid #141414 !important;
+	border-top: 1px solid #141414 !important;
+	padding: 15px;
+}
+
+.table thead th {
+	border-bottom: 1px solid #141414 !important;
+	border-top: 1px solid #141414 !important;
+	padding: 15px;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+	background-color: #fff !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) td {
+	box-shadow: none;
+}
+
+
+
+/*TABELA NAGLOWKI PIERWSZY WIERSZ*/
+
+table thead th {
+    border-bottom-color: #141414;
+}
+
+
+/*TABELA NAGLOWKI BRAK */
+
+/*TABELA NAGLOWKI - PIERWSZA KOLUMNA */
+
+/*TABELA NAGLOWKI - OBA */
+
+
+/*TABELA STYLE */
+
+.szary_tlo_jasne {
+    background-color: #cfcfcf;
+}
+
+.szary_tlo_srednie {
+    background-color: #747474;
+}
+
+.szary_tlo_ciemne {
+    background-color: #676767;
+}
+
+.bez_tla {
+    border-color: #cfcfcf;
+}
+
+.even tbody tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+.odd tbody tr:nth-child(odd) {
+    background-color: #f5f5f5;
+}
+
+/*ZALACZNIKI*/
+table .file a {
+    color: #000;
+}
+
+
+.table-hover>tbody>tr:hover {
+    --bs-table-accent-bg: none !important;
+    color: var(--hover-UG);
+}
+
+.table-hover tbody tr:hover {
+    background-color: #fff !important;
+}
+
+table .file a:hover {
+    color: var(--hover-UG);
+}

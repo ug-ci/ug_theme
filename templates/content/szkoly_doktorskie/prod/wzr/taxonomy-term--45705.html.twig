@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ SZKOŁY DOKTORSKIE - Zarządzanie - LIMITY PRZYJĘĆ
+ * @see template_preprocess_taxonomy_term()
+ *
+ * Kopia z:
+ - bootstrap_barrio/templates/content/taxonomy-term.html.twig
+ - ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig
+ *
+ */
+#}
+
+{%
+  set classes = [
+  'taxonomy-term',
+  'vocabulary-' ~ term.bundle|clean_class,
+]
+%}
+{#{% set hide_prezentacja = 1 %} #}{# nie pokazuj podpiętych stron #}
+
+
+{% extends "@ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig" %}
+{% block blockbefore %}
+{# SD Biologia - limity przyjęć#}
+    {{ drupal_entity('node', '123700', 'szkoly_doktorskie_limity_przyjec') }}
+{% endblock %}

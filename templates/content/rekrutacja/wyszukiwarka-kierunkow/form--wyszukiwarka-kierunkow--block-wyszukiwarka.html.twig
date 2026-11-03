@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ * Theme override for a 'form' element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The child elements of the form.
+ *
+ * @see template_preprocess_form()
+ */
+#}
+TEST FORM
+
+{# Get the existing classes (if any) #}
+{% set existing_classes = form['#attributes']['class']|default([]) %}
+
+{# Add your custom class to the existing ones #}
+{% set combined_classes = existing_classes|merge(['bg-light', 'p-5']) %}
+
+{# Update the attributes with the combined classes #}
+{% set form = form|merge({'#attributes': {'class': combined_classes}}) %}
+
+
+{{ attach_library('bootstrap_barrio/form') }}
+<form{{ attributes }}>
+  {{ children }}
+</form>

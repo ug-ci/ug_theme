@@ -1,0 +1,37 @@
+global-styling:
+  version: VERSION
+  js:
+    js/global.js: {}
+  css:
+    component:
+      css/root-colors.css: {}
+      css/style.css: {}
+      css/colors.css: {}
+      css/flexslider.css: {}
+      # css/newest-news.css: {}
+      # css/kafle-centralne.css: {}
+      css/kafle-linki.css: {}
+      css/footer.css: {}
+      css/menu.css: {}
+      css/ug-w-liczbach.css: {}
+      css/rekrutacja.css: {}
+      css/components/tabledrag.css: {}
+      css/components/ckeditor-styles.css: {}
+      css/eu_cookie_compliance.css: {}
+      css/superfish_override.css: {}
+bootstrap_ug:
+  js:
+#    /libraries/popper.js/dist/umd/popper.min.js: {}
+    /libraries/bootstrap/dist/js/bootstrap.bundle.min.js: {}
+  css:
+    component:
+      /libraries/bootstrap/dist/css/bootstrap.min.css: {}
+color.preview:
+  version: VERSION
+  css:
+    theme:
+      color/preview.css: {}
+  js:
+    color/preview.js: {}
+  dependencies:
+    - color/drupal.color

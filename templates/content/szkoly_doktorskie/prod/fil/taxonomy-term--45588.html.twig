@@ -1,0 +1,29 @@
+{#
+/**
+ * @file
+ SZKOŁY DOKTORSKIE - Filologia - KONTAKT
+ * @see template_preprocess_taxonomy_term()
+ *
+ * Kopia z:
+ - bootstrap_barrio/templates/content/taxonomy-term.html.twig
+ - ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig
+ *
+ */
+#}
+
+{# SD Filologia - kontakt #}
+{%
+    set classes = [
+    'taxonomy-term',
+    'vocabulary-' ~ term.bundle|clean_class,
+]
+%}
+{% extends "@ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig" %}
+
+{# wersja pl:  Szkoła doktorska - Filologia - kontakt #}
+{% if language == 'pl' %}
+    {% block blockbefore %}
+        {# SD Filologia - kontakt #}
+        {{ include('@ug_theme/includes/sd_details.html.twig',  {nid: '123694', mode: 'kontakt'}  ) }}
+    {% endblock %}
+{% endif %}

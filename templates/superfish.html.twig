@@ -1,0 +1,108 @@
+{#
+/**
+ * @file
+ * Default theme implementation of the Superfish menus.
+ *
+ * Available variables:
+ * - id: Unique menu identifier.
+ * - menu_classes: Menu classes.
+ * - menu_items: Menu tree.
+ *
+ * @see template_preprocess_superfish()
+ *
+ * @ingroup themeable
+ */
+#}
+
+
+<ul id="{{ id }}" class="{{ menu_classes }}">
+
+  <li class="row d-flex d-lg-none">
+    <div class="col-auto">
+      <a href="http://player.mors.ug.edu.pl/sites/all/modules/jplayer/mors_popup.html" tabindex="-1"
+         title="Listen to Radio MORS" target="_blank">
+        <span class="material-icons text-white">
+          radio
+        </span>
+      </a>
+    </div>
+    <div class="col-auto pt-1">
+      <a  href="https://outlook.com/ug.edu.pl" id="webmail" title="Poczta uniwersytecka">
+      <span class="material-icons text-white">
+        mail
+      </span>
+      </a>
+    </div>
+    <div class="col-auto pt-1">
+      <a href="http://bariery.ug.edu.pl" id="accessibility"
+         title="Strona Biura ds. Osób Niepełnosprawnych">
+        <span class="material-icons text-white">accessible</span></a></div>
+    {#    <div class="col-auto"><a href="/en" class=" fw-bold text-white en-lang" style="font-size: 21px!important; margin-top: 5px!important; color: #052d73!important">EN</a></div>#}
+    <div class="col-auto d-flex align-items-center  fw-bold fs-3 text-white">
+
+      {# {{ drupal_block('language_block:language_interface', wrapper=false) }} #}
+
+
+      <div class="en">
+        {% set site_url = url('<front>') %}
+        {% set other_language_site_url = 'https://en.ug.edu.pl' %}
+        {% if 'https://en.' in site_url|render|render or 'https://en-' in site_url|render|render %}
+          {% set other_language_site_url = site_url|render|replace({'https://en.': 'https://', 'https://en-': 'https://'}) %}
+          {% set other_language_id = 'polish' %}
+          {% set other_language_lang = 'pl' %}
+          {% set other_language_title = 'Polish Version - Polska wersja' %}
+          {% set other_language_img_alt = 'Polish Version - Polska wersja' %}
+          {% set other_language_img_src = '/themes/ug_theme/images/pl.svg' %}
+        {% else %}
+          {% set other_language_site_url = site_url|render|replace({'https://': 'https://en.'}) %}
+          {% set other_language_id = 'english' %}
+          {% set other_language_lang = 'en' %}
+          {% set other_language_title = 'English Version - Angielska wersja' %}
+          {% set other_language_img_alt = 'English Version - Angielska wersja' %}
+          {% set other_language_img_src = '/themes/ug_theme/images/en.svg' %}
+        {% endif %}
+        <a href="{{ other_language_site_url }}" id="{{ other_language_id }}" lang="{{ other_language_lang }}" title="{{ other_language_title }}" class="other_language_lang text-uppercase fs-3">
+          {{other_language_lang}}
+        </a>
+
+      </div>
+
+
+    </div>
+{#    <div class="icons-mobile px-0 mx-auto py-4 col-12 techniczne g-1">#}
+
+{#      <div class="col border-end d-flex justify-content-center flex-column align-items-center">#}
+{#        <a href="javascript:void(0)" id="radiomors" onclick="window.open('http://player.mors.ug.edu.pl/sites/all/modules/jplayer/mors_popup.html', 'newWin','width=280,height=220')" tabindex="0" title="Listen to Radio MORS">#}
+{#          <img alt="Radio MORS" src="/themes/ug_theme/images/radio.svg" />#}
+{#        </a>#}
+{#      </div>#}
+{#      <div class="col border-end d-flex justify-content-center flex-column align-items-center">#}
+{#        <a href="https://outlook.com/ug.edu.pl" id="webmail" title="Poczta uniwersytecka" tabindex="0" >#}
+{#          <img alt="Poczta UG" src="/themes/ug_theme/images/mail.svg" />#}
+{#        </a>#}
+{#      </div>#}
+{#      <div class="col border-end d-flex justify-content-center flex-column align-items-center">#}
+{#        <a href="https://bariery.ug.edu.pl" id="accessibility" title="Strona Biura ds. Osób Niepełnosprawnych" tabindex="0" >#}
+{#          <img alt="Dla niepełnosprawnych" src="/themes/ug_theme/images/wheelchair.svg" />#}
+{#        </a>#}
+{#      </div>#}
+{#      <div class="col border-end d-flex justify-content-center flex-column align-items-center me-1">#}
+{#        <a href="https://en.ug.edu.pl/" id="english" lang="en" title="English Version" tabindex="0" style="font-size: 20px;font-weight: 500;color: white;">#}
+{#          EN#}
+{#        </a>#}
+{#      </div>#}
+{#      <div class="col  d-flex align-items-center ms-1 ">#}
+{#        <a href="https://projekty.ug.edu.pl/projekty/" title="Projekty" tabindex="0" class="ml-2" >#}
+{#          <img src="https://ug.edu.pl/themes/ug_theme/images/ue-flag.svg" alt="Unia Europejska" style="max-width: 75px; height: auto;"/>#}
+{#        </a>#}
+{#      </div>#}
+
+
+
+{#    </div>#}
+  </li>
+
+  {{ menu_items }}
+</ul>
+
+

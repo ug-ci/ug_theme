@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ SZKOŁY DOKTORSKIE -  Biologia EN - zasady rekrutacji
+ * @see template_preprocess_taxonomy_term()
+ *
+ * Kopia z:
+ - bootstrap_barrio/templates/content/taxonomy-term.html.twig
+ - ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig
+ *
+ */
+#}
+{%
+    set classes = [
+    'taxonomy-term',
+    'vocabulary-' ~ term.bundle|clean_class,
+]
+%}
+{% extends "@ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig" %}
+
+{# wersja en:  Szkoła doktorska  - EN Biologia - zasady rekrutacji #}
+{% if language == 'en' %}
+    {% block blockbefore %}
+        {{ include('@ug_theme/includes/sd_details.html.twig',  {nid: '107337', mode: 'zasady'}  ) }}
+    {% endblock %}
+{% endif %}

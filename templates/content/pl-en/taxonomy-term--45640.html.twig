@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ EN: SZKOŁY DOKTORSKIE - WZR EN - zasady rekrutacji
+ PL: SD WNS - opłaty
+ * @see template_preprocess_taxonomy_term()
+ *
+ * Kopia z:
+ - bootstrap_barrio/templates/content/taxonomy-term.html.twig
+ - ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig
+ *
+ */
+#}
+{% set classes = [
+    'taxonomy-term',
+    'vocabulary-' ~ term.bundle|clean_class,
+] %}
+{% extends "@ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig" %}
+
+{% block blockbefore %}
+    {% if language == 'en' %}
+        {# wersja en:  Szkoła doktorska - EN WZR - zasady rekrutacji #}
+        {{ include('@ug_theme/includes/sd_details.html.twig',  {nid: '107345', mode: 'zasady'}  ) }}
+    {% elseif language == 'pl' %}
+        {# SD WNS - opłaty #}
+        {{ drupal_entity('node', '123698', 'szkoly_doktorskie_oplaty') }}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,56 @@
+{#
+/**
+ * @file
+ *
+ * Usunięcie <h3> z grupowania, żeby można tam było użyć innego z html-em
+ *
+ * dodatkowy div naokoło
+ * zamiana <div> na <li>
+ *
+ * Theme override to display a view of unformatted rows.
+ *
+ * Available variables:
+ * - title: The title of this group of rows. May be empty.
+ * - rows: A list of the view's row items.
+ *   - attributes: The row's HTML attributes.
+ *   - content: The row's content.
+ * - view: The view object.
+ * - default_row_class: A flag indicating whether default classes should be
+ *   used on rows.
+ *
+ * @see template_preprocess_views_view_unformatted()
+ */
+#}
+{% if title %}
+  <h3>{{ title }}</h3>
+  <button class="btn btn-link btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ title }}</button>
+{% endif %}
+
+<ul class="dropdown-menu small">
+
+{% for row in rows %}
+  {%
+    set row_classes = [
+      default_row_class ? 'views-row',
+    ]
+  %}
+  <li{{ row.attributes.addClass(row_classes) }}>
+    {{ row.content }}
+  </li>
+{% endfor %}
+</ul>
+
+{#<div class="container">#}
+{#    <div class="row">#}
+{#        {% for row in rows %}#}
+{#            {%#}
+{#                set row_classes = [#}
+{#                default_row_class ? 'views-row',#}
+{#            ]#}
+{#            %}#}
+{#            <li{{ row.attributes.addClass(row_classes) }}>#}
+{#                {{ row.content }}#}
+{#            </li>#}
+{#        {% endfor %}#}
+{#    </div>#}
+{#</div>#}

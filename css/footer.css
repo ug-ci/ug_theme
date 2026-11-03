@@ -1,0 +1,32 @@
+footer.site-footer {
+  /* overflow: hidden; */
+  /* padding-bottom: 25px !important; */
+  background: #042C73 !important;
+  margin-top: 2rem;
+}
+
+footer a:hover {
+  color: whitesmoke !important;
+}
+
+.page__footer {
+  background: #052d73;
+  color: white;
+}
+
+.page__footer a {
+  color: white;
+}
+
+@media (min-width: 576px) {
+
+ footer.block-block-content {
+    border-left: 0px !important;
+    border-top: 1px solid white;
+  }
+
+}
+
+.site-footer__bottom a img:hover {
+  opacity: 0.5;
+}

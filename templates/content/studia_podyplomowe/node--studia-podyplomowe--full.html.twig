@@ -1,0 +1,867 @@
+{#
+/**
+ * @file
+ * Bootstrap Barrio's theme implementation to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+     Only "getter" methods (method names starting with "get", "has", or "is")
+     and a few common methods such as "id" and "label" are available. Calling
+     other methods (such as node.delete) will result in an exception.
+ * - label: The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: Themed creation date field.
+ * - author_name: Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_node()
+ */
+#}
+{{ attach_library('bootstrap_barrio/node') }}
+
+{% set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'clearfix',
+] %}
+<article{{ attributes.addClass(classes) }}>
+    <header>
+        {{ title_prefix }}
+        {% if label and not page %}
+            <h2{{ title_attributes.addClass('node__title') }}>
+                <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+            </h2>
+        {% endif %}
+        {{ title_suffix }}
+
+    </header>
+    <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
+
+
+        {#        {{ kint(content) }} #}
+        <div class="container">
+            {% if node.field_cel_studiow_podypl.value %}
+                <div class="row">
+                    <div class="card mb-3">
+                        <div class="row no-gutters">
+                            <div class="col-md-2 text-center p-4">
+                          <span class="symbol  material-icons card-img">
+                            ads_click
+                          </span>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="card-body">
+                                    <h5 class="card-title">Cel studiów</h5>
+                                    <div class="card-text">
+                                        {{ content.group_dane_ogolne.field_cel_studiow_podypl }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- czas trwania i forma -->
+            {% if node.field_sposob_realizacji_zajec.value
+                or node.field_czas_trwania_podypl.value
+                or node.field_forma_studiow_podypl.value %}
+                <div class="row">
+                    <div class="card mb-3">
+                        <div class="row no-gutters">
+                            <div class="col-md-2 text-center p-4">
+                              <span class="symbol material-icons">
+                            timer
+                            </span>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="card-body">
+                                    <h5 class="card-title">Czas trwania i forma
+                                        studiów</h5>
+                                    <div class="card-text">
+                                        {% if node.field_sposob_realizacji_zajec.value %}
+                                            <div class="container-inline">
+                                                W uczelni czy online:
+                                                {{ content.group_dane_ogolne.field_sposob_realizacji_zajec }}</div>
+                                        {% endif %}
+                                        {#                            {{ kint( content.group_dane_ogolne.field_sposob_realizacji_zajec) }}</p> #}
+                                        {# ile semestrów #}
+                                        {% if node.field_czas_trwania_podypl.value %}
+                                            <div class="mt-2">{{ content.group_dane_ogolne.field_czas_trwania_podypl }}</div>
+                                        {% endif %}
+                                        {% if node.field_forma_studiow_podypl.value %}
+                                            <div class="mt-2">{{ content.group_dane_ogolne.field_forma_studiow_podypl }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if node.field_strona_www.value %}
+                <div class="row">
+                    <div class="card mb-3">
+                        <div class="row no-gutters">
+                            <div class="col-md-2 text-center p-4">
+                          <span class="symbol material-icons">
+                        language
+                        </span>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="card-body">
+                                    <h5 class="card-title">Strona WWW</h5>
+                                    <p class="card-text">
+                                        {{ content.group_dane_ogolne.field_strona_www }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {# LINK do IRK - o ile trwa rekrutacja #}
+            {% if (node.field_czy_trwa_rekrutacja.value) %}
+                {% set today = "now"|date("Y-m-d") %}
+                {% if node.field_do_kiedy_rekrutacja.value >= today %}
+                    <div class="row">
+                        <div class="card mb-3">
+                            <div class="row no-gutters">
+                                <div class="col-md-2 text-center p-4">
+                                    <span class="symbol material-icons">how_to_reg</span>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Zarejestruj
+                                            się!</h5>
+                                        <p class="card-text">
+                                            <a href="https://podyplomowi.irk.ug.edu.pl">Internetowa
+                                                Rejestracja Kandydatów</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+
+            {# Uwagi #}
+            {% if node.field_uwagi.value %}
+                <div class="row">
+                    <div class="card mb-3">
+                        <div class="row no-gutters">
+                            <div class="col-md-2 text-center p-4">
+              <span class="symbol material-icons">
+            info
+            </span>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="card-body">
+                                    <h5 class="card-title">Uwagi</h5>
+                                    <div class="card-text">
+                                        {{ content.group_dane_ogolne.field_uwagi }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+
+        {#        wersja z ckeditor accordion #}
+
+
+        <dl class="ckeditor-accordion closed">
+
+
+            {% if node.field_osoba_rekomendujaca.value
+                or node.field_powiazanie_z_pracownikiem.value
+                or node.field_rekomendacja.value
+                or node.field_podpis_pod_rekomendacja.value
+                or node.field_loga_partnerow|length > 0 %}
+                <dt class="fs-3">O studiach</dt>
+                <dd>
+                    {% if node.field_rekomendacja.value %}
+                        {{ content.group_szczegoly.group_sp_o_studiach.group_sp_rekomendacja.field_rekomendacja }}
+                    {% endif %}
+
+                    {% if node.field_podpis_pod_rekomendacja.value %}
+                        <div class="text-align-right font-italic">{{ content.group_szczegoly.group_sp_o_studiach.group_sp_rekomendacja.field_podpis_pod_rekomendacja }}</div>
+                    {% endif %}
+
+                    {% if node.field_osoba_rekomendujaca.value %}
+                        <div class="text-align-right font-italic">{{ content.group_szczegoly.group_sp_o_studiach.group_sp_rekomendacja.field_osoba_rekomendujaca }}</div>
+                    {% endif %}
+
+                    {#                {% if node.field_powiazanie_z_pracownikiem.value %} #}
+                    {#                Osoba rekomendująca (pracownik UG) #}
+                    {#                    <div class="text-align-right font-italic">{{ content.group_szczegoly.group_sp_o_studiach.group_sp_rekomendacja.field_powiazanie_z_pracownikiem }}</div> #}
+                    {#                {% endif %} #}
+
+                    {% if node.field_loga_partnerow|length > 0 %}
+                        <h3>Partnerzy</h3>
+                        <div class="d-flex justify-content-center">
+                            {{ content.group_szczegoly.group_sp_o_studiach.field_loga_partnerow }}
+                        </div>
+                    {% endif %}
+                </dd>
+            {% endif %}
+
+            {% if node.field_program_podypl.value
+                or node.field_sp_plan_studiow.value
+                or node.field_kryteria_zaliczenia_podypl.value %}
+{#                or node.field_zalacznik.value#}
+                <dt class="fs-3">Organizacja studiów podyplomowych</dt>
+                <dd>
+                    {% if node.field_program_podypl.value %}
+                        <h3 class="fs-4 pt-3 pb-2">Program</h3>
+
+                        {{ content.group_szczegoly.group_sp_organizacja_studiow.field_program_podypl }}
+                    {% endif %}
+
+                    {% if node.field_sp_plan_studiow.value %}
+{#                    {% if node.field_zalacznik.value %}#}
+                        <h3 class="fs-4 pt-3 pb-2">Plan studiów</h3>
+{#                        {{ content.group_szczegoly.group_sp_organizacja_studiow.field_zalacznik }}#}
+                        {{ content.group_szczegoly.group_sp_organizacja_studiow.field_sp_plan_studiow }}
+                    {% endif %}
+
+                    {% if node.field_kryteria_zaliczenia_podypl.value %}
+                        <h3 class="fs-4 mt-3 mb-2">Kryteria zaliczenia studiów
+                            podyplomowych</h3>
+                        {{ content.group_szczegoly.group_sp_organizacja_studiow.field_kryteria_zaliczenia_podypl }}
+                    {% endif %}
+                </dd>
+            {% endif %}
+
+
+            <dt class="fs-3">Sylwetka absolwenta</dt>
+            <dd class="mx-3">
+                {{ content.group_szczegoly.group_sp_sylwetka_absolwenta.field_sylwetka_absolwenta_podyp }}
+            </dd>
+
+            {% if (node.field_oplaty_podypl.value) %}
+                <dt class="fs-3">Opłaty</dt>
+                <dd class="mx-3">
+                    {{ content.group_szczegoly.group_sp_oplaty.field_oplaty_podypl }}
+                    {#                {{ content.group_szczegoly.group_sp_oplaty.field_oplata_za_semestr }} #}
+                </dd>
+            {% endif %}
+
+
+            {#                or node.field_limit_miejsc_podypl.value #}
+            {% if node.field_sylwetka_kandydata_podypl.value
+                or node.field_zasady_naboru_podypl.value
+                or node.field_limit_minimum.value
+                or node.field_limit_maksimum.value
+                or node.field_dokumenty_rekrutacyjne_pod.value
+                or node.field_terminy_rekrutacji_podypl.value %}
+                <dt class="fs-3">Rekrutacja</dt>
+                <dd>
+                    {% if node.field_sylwetka_kandydata_podypl.value %}
+                        <h3 class="fs-4 pt-3 pb-2">Sylwetka kandydata</h3>
+                        <div class="mx-3">
+                            {{ content.group_szczegoly.group_sp_rekrutacja.field_sylwetka_kandydata_podypl }}
+                        </div>
+                    {% endif %}
+
+                    {% if node.field_zasady_naboru_podypl.value %}
+                        <h3 class="fs-4 pt-3 pb-2">Zasady naboru</h3>
+                        {{ content.group_szczegoly.group_sp_rekrutacja.field_zasady_naboru_podypl }}
+                    {% endif %}
+
+                    {% if node.field_limit_minimum.value or node.field_limit_maksimum.value %}
+                        <h3 class="fs-4 pt-3 pb-2">Limit miejsc</h3>
+                        {% if node.field_limit_minimum.value %}Minimum: {{ node.field_limit_minimum.value |pl_count('osoba', 'osoby', 'osób') }}
+                            <br/>{% endif %}
+                        {% if node.field_limit_maksimum.value %}Maksimum: {{ node.field_limit_maksimum.value |pl_count('osoba', 'osoby', 'osób') }}{% endif %}
+                    {% endif %}
+
+                    {% if node.field_dokumenty_rekrutacyjne_pod.value %}
+                        <h3 class="fs-4 pt-3 pb-2">Dokumenty rekrutacyjne</h3>
+                        {{ content.group_szczegoly.group_sp_rekrutacja.field_dokumenty_rekrutacyjne_pod }}
+                    {% endif %}
+
+                    {# termin składania dokumentów - wartosć brana z paragrafu #}
+                    {% if node.field_sp_terminy.value is not empty %}{# terminy jako paragraph #}
+                        <div class="px-3">
+                            {% for termin in node.field_sp_terminy %}
+                                {% if termin.entity.field_sp_termin_nazwa.value == 'skladanie_dokumentow' %}
+                                    <h4 class="fs-5 pt-1 pb-2">Termin składania dokumentów</h4>
+                                    {{ termin.entity|view('studia_podyplomowe') }}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+                    {% endif %}
+                    {% if node.field_sp_dokumenty_miejsce.value is not empty %}{# stare pole #}
+                        <div class="px-3">
+                            <h4 class="fs-5 pt-1 pb-2">Miejsce składania dokumentów</h4>
+                            <div class="px-2">
+                                {{ content.group_szczegoly.group_sp_rekrutacja.field_sp_dokumenty_miejsce }}
+                            </div>
+                        </div>
+                    {% endif %}
+
+
+                    {% if node.field_terminy_rekrutacji_podypl.value or node.field_sp_terminy.value %}
+                        <h3 class="fs-4 pt-3 pb-2">Terminy i etapy rekrutacji</h3>
+                        {% if node.field_sp_terminy.value and node.field_sp_dokumenty_miejsce.value %}
+                            {% set oba_nowe_pola_wypelnione = true %}
+                        {% else %}
+                            {% set oba_nowe_pola_wypelnione = false %}
+                        {% endif %}
+
+                        {% if node.field_sp_terminy.value is not empty %}{# terminy jako paragraph #}
+                            {#                            <h4 class="fs-5 pt-1 pb-2">Terminy rekrutacji</h4> #}
+                            {{ content.group_szczegoly.group_sp_rekrutacja.field_sp_terminy }}
+                        {% endif %}
+
+                        {% if node.field_terminy_rekrutacji_podypl.value is not empty
+                            and oba_nowe_pola_wypelnione == false %}
+                            {# stare pole #}
+                            {#                            <h4 class="fs-5 pt-1 pb-2">Terminy rekrutacji/miejsce składania dokumentów</h4> #}
+                            <div class="px-2">
+                                {{ content.group_szczegoly.group_sp_rekrutacja.field_terminy_rekrutacji_podypl }}
+                            </div>
+                        {% endif %}
+
+                        {#                        {% if node.field_miejsce_skl_dokumentow.value is not empty %} #}
+                        {#                            <h4 class="fs-5 pt-1 pb-2">Miejsce składania dokumentów</h4> #}
+                        {#                            {{ content.group_szczegoly.group_sp_rekrutacja.field_miejsce_skl_dokumentow }} #}
+                        {#                        {% endif %} #}
+                    {% endif %}
+                </dd>
+            {% endif %}
+
+            {#   KADRA   #}
+
+            {% if node.field_kierownik_sp_ref.value
+                or node.field_wykladowcy_z_ug.value
+                or node.field_wykladowcy_spoza_ug.value
+                or node.field_sp_kadra.value %}
+
+
+                <dt class="fs-3">Kadra</dt>
+                <dd class="open">
+                    {#                test - czy wyłączony jest cache #}
+
+                    {% if node.field_kierownik_sp_ref.value %}
+                        <h3 class="fs-4 pt-3 pb-2">Kierownik studiów podyplomowych</h3>
+                        {#                <div class="fs-4">{{ content.group_szczegoly.group_sp_kadra.field_kierownik }}</div> #}
+                        {% for item in node.field_kierownik_sp_ref %}
+                            {{ drupal_entity('paragraph', item.target_id, 'studia_podyplomowe') }}
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if node.field_wykladowcy_z_ug.value or node.field_wykladowcy_spoza_ug.value or node.field_sp_staff_description.value or node.field_sp_kadra.value %}
+                        {#                {{ kint(content.group_szczegoly.group_sp_kadra) }} #}
+
+                        {#                <dl class="ckeditor-accordion closed"> #}
+                        {#                <dt class="fs-3">Wykładowcy</dt> #}
+                        {#                <dd class="open"> #}
+                        <h3 class="fs-4 pt-3 pb-2">Wykładowcy</h3>
+                        {% if node.field_sp_staff_description.value %}
+                            {{ content.group_szczegoly.group_sp_kadra.field_sp_staff_description }}
+
+                        {% endif %}
+
+                        {#                {% if node.field_wykladowcy_z_ug.value %} #}
+                        {# <h3>field_wykladowcy_z_ug</h3> #}
+                        {#                {{ content.group_szczegoly.group_sp_kadra.field_wykladowcy_z_ug }} #}
+                        {#                {% endif %} #}
+
+                        {#                {% if node.field_wykladowcy_spoza_ug.value | length > 0 %} #}
+                        {#                    {% for item in node.field_wykladowcy_spoza_ug %} #}
+                        {#                        {{ drupal_entity('paragraph', item.target_id, 'studia_podyplomowe') }} #}
+                        {#                    {% endfor %} #}
+                        {#                {% endif %} #}
+
+                        {% if node.field_sp_kadra.value | length > 0 %}
+                            {# <h3>field_sp_kadra</h3> #}
+                            {% for item in node.field_sp_kadra %}
+                                {#                        display: wykładowca spoza UG - {{ item.target_id }} #}
+                                {{ drupal_entity('paragraph', item.target_id, 'studia_podyplomowe') }}
+                            {% endfor %}
+                        {% endif %}
+                        {#                </dd> #}
+                        {#            </dl> #}
+
+                    {% endif %}
+
+
+                    {# Możliwy wygląd - na przyszłość #}
+                    {#                <div class="row g-5 mx-auto col-12 col-lg-10 text-center text-lg-start pb-5 mt-5 border-bottom"> #}
+                    {#                    <div class="col-lg-3 text-center"><img #}
+                    {#                                alt="Janina Kowalska" #}
+                    {#                                class="img-fluid rounded-circle thumbnail" #}
+                    {#                                src="https://historia.ug.edu.pl/sites/historia.ug.edu.pl/files/_nodes/strona/102010/images/pngkey.com-placeholder-png-3499617.png" #}
+                    {#                                style="max-height: 150px"/> #}
+                    {#                    </div> #}
+                    {#                    <div class="col-lg-9 text-center text-lg-start"> #}
+                    {#                        <h3 class="h4 mb-3 mx-auto mx-lg-0"><a #}
+                    {#                                    class="text-decoration-none lh-1" #}
+                    {#                                    href="https://ug.edu.pl/o_uczelni/wladze/prorektor_ds_wspolpracy_miedzynarodowej">dr #}
+                    {#                                hab. Janina Kowalska, prof UG</a> #}
+                    {#                        </h3> #}
+                    {#                        <p> Tekst o osobie</p> #}
+                    {#                    </div> #}
+                    {#                </div> #}
+
+
+                    {#                <h3 class="fs-4 pt-3 pb-2">Wykładowcy</h3> #}
+                    {#                <div class="row g-5 mx-auto col-12 col-lg-10 text-center text-lg-start pb-5 mt-5 border-bottom"> #}
+                    {#                    <div class="col-lg-3 text-center"><img #}
+                    {#                                alt="Janina Kowalska" #}
+                    {#                                class="img-fluid rounded-circle thumbnail" #}
+                    {#                                src="https://historia.ug.edu.pl/sites/historia.ug.edu.pl/files/_nodes/strona/102010/images/pngkey.com-placeholder-png-3499617.png" #}
+                    {#                                style="max-height: 150px"/> #}
+                    {#                    </div> #}
+                    {#                    <div class="col-lg-9 text-center text-lg-start"> #}
+                    {#                        <h3 class="h4 mb-3 mx-auto mx-lg-0"><a #}
+                    {#                                    class="text-decoration-none lh-1" #}
+                    {#                                    href="https://ug.edu.pl/o_uczelni/wladze/prorektor_ds_wspolpracy_miedzynarodowej">dr #}
+                    {#                                hab. Janina Kowalska, prof UG</a> #}
+                    {#                        </h3> #}
+                    {#                        <p> Tekst o osobie</p> #}
+                    {#                    </div> #}
+                    {#                </div> #}
+
+                    {#                <div class="row g-5 mx-auto col-12 col-lg-10 text-center text-lg-start pb-5 mt-5 border-bottom"> #}
+                    {#                    <div class="col-lg-3 text-center"><img #}
+                    {#                                alt="Janina Kowalska" #}
+                    {#                                class="img-fluid rounded-circle thumbnail" #}
+                    {#                                src="https://historia.ug.edu.pl/sites/historia.ug.edu.pl/files/_nodes/strona/102010/images/pngkey.com-placeholder-png-3499617.png" #}
+                    {#                                style="max-height: 150px"/> #}
+                    {#                    </div> #}
+                    {#                    <div class="col-lg-9 text-center text-lg-start"> #}
+                    {#                        <h3 class="h4 mb-3 mx-auto mx-lg-0"><a #}
+                    {#                                    class="text-decoration-none lh-1" #}
+                    {#                                    href="https://ug.edu.pl/o_uczelni/wladze/prorektor_ds_wspolpracy_miedzynarodowej">dr #}
+                    {#                                hab. Janina Kowalska, prof UG</a> #}
+                    {#                        </h3> #}
+                    {#                        <p> Tekst o osobie</p> #}
+                    {#                    </div> #}
+                    {#                </div> #}
+
+                    {#                <div class="row g-5 mx-auto col-12 col-lg-10 text-center text-lg-start pb-5 mt-5 border-bottom"> #}
+                    {#                    <div class="col-lg-3 text-center"><img #}
+                    {#                                alt="Janina Kowalska" #}
+                    {#                                class="img-fluid rounded-circle thumbnail" #}
+                    {#                                src="https://historia.ug.edu.pl/sites/historia.ug.edu.pl/files/_nodes/strona/102010/images/pngkey.com-placeholder-png-3499617.png" #}
+                    {#                                style="max-height: 150px"/> #}
+                    {#                    </div> #}
+                    {#                    <div class="col-lg-9 text-center text-lg-start"> #}
+                    {#                        <h3 class="h4 mb-3 mx-auto mx-lg-0"><a #}
+                    {#                                    class="text-decoration-none lh-1" #}
+                    {#                                    href="https://ug.edu.pl/o_uczelni/wladze/prorektor_ds_wspolpracy_miedzynarodowej">dr #}
+                    {#                                hab. Janina Kowalska, prof UG</a> #}
+                    {#                        </h3> #}
+                    {#                        <p> Tekst o osobie</p> #}
+                    {#                    </div> #}
+                    {#                </div> #}
+
+
+                </dd>
+            {% endif %}
+
+            {# IN PROGESS - CURRENT!!! #}
+            <dt class="fs-3"><h2>Kontakt</h2></dt>
+            <dd>
+                <h3 class="fs-4 pt-3 pb-2">Organizator</h3>
+                {#                {{ content.group_szczegoly.group_sp_dane_kontaktowe.field_wydzial_aktualny }} #}
+
+                {% for item in node.field_wydzial_aktualny %}
+
+                    {#                    {{ item.entity | view('logo_wydzialu_nazwa') }} #}
+                    {{ drupal_entity('taxonomy_term', item.target_id, 'logo_wydzialu_nazwa') }}
+                {% endfor %}
+                {% if node.field_organizator_wspolpraca.value | length > 0 %}
+                    <h4>We współpracy z:</h4>
+                    {% for item in node.field_organizator_wspolpraca.value %}
+                        {{ item }}
+                    {% endfor %}
+                {% endif %}
+
+                {# Rendered as Nazwa wydziału z logo #}
+
+
+                <h3 class="fs-4 pt-3 pb-2">Kontakt</h3>
+                {% if node.field_kontakt_podypl.value %}
+                    <h4 class="text-mute sr-only">Kontakt z biurem</h4>
+                    <div class="my-2">
+                        {{ content.group_szczegoly.group_sp_dane_kontaktowe.field_kontakt_podypl }}
+                    </div>
+                {% endif %}
+
+
+                {% if node.field_telefon.value
+                    or node.field_adres_e_mail.value
+                    or node.field_fax.value %}
+
+                    {% set tel_mail_r = {
+                        'field_telefon' : node.field_telefon,
+                        'field_email' : node.field_adres_e_mail ,
+                        'field_fax' : node.field_fax ,
+                        'field_informacje_uzupelniajace' : node.field_kontakt_podypl.0.value,
+                    } %}
+
+                    {#                    {{ kint(tel_mail_r.field_informacje_uzupelniajace) }} #}
+
+                {% endif %}
+
+
+                {% if node.field_mapa_adres.value or tel_mail_r %}
+                    <h4 class="text-mute sr-only">Mapa + adres</h4>
+                    <b class="fs-5 mt-3">{{ node.field_mapa_adres.entity.title.value }}</b>
+
+
+
+
+                    {% set adres_budynku = node.field_mapa_adres.entity.field_adres_budynku %}
+                    {% if adres_budynku %}
+                        {% set budynek_id = node.field_mapa_adres.entity.id() %}
+                    {% else %}
+                        {% set budynek_id = '' %}
+                    {% endif %}
+                    <div class="my-3">
+                        {% include '@ug_theme/content/mapy/tpl_adres_krotki_z_mapa.html.twig' with
+                            {'tel_mail': tel_mail_r, 'budynek_id': budynek_id, 'adres': adres_budynku, 'id_map': 'biuro'} %}
+                    </div>
+                {% endif %}
+            </dd>
+
+        </dl>
+
+        {#        <!-- Accordion --> #}
+        {#        #}{# za: https://codepen.io/umut79a/pen/MWwEjpo #}
+        {#        <div class="accordion ckeditor-accordion-container" id="accordionSP"> #}
+        {#            <div class="accordion-item"> #}
+        {#                <h2 class="accordion-header mb-0 fs-2" id="headingOStudiach"> #}
+        {#                    <button class="btn btn-link" type="button" #}
+        {#                            data-toggle="collapse" #}
+        {#                            data-target="#collapseOStudiach" #}
+        {#                            aria-expanded="true" #}
+        {#                            aria-controls="collapseOStudiach"> #}
+        {#                        O studiach #}
+        {#                    </button> #}
+        {#                </h2> #}
+
+
+        {#                <div id="collapseOStudiach" class="collapse show" #}
+        {#                     aria-labelledby="headingOStudiach" #}
+        {#                     data-parent="#accordionSP"> #}
+        {#                    <div class="card-body"> #}
+
+        {#                         <h3 class="fs-4 pt-3 pb-2">Rekomendacja</h3> #}
+        {#                        Osoba rekomendująca #}
+        {#                        {{ content.group_szczegoly.group_sp_o_studiach.field_osoba_rekomendujaca }} #}
+        {#                        Osoba rekomendująca (pracownik UG) #}
+        {#                        {{ content.group_szczegoly.group_sp_o_studiach.field_powiazanie_z_pracownikiem }} #}
+        {#                        Rekomendacja #}
+        {#                        {{ content.group_szczegoly.group_sp_o_studiach.field_rekomendacja }} #}
+        {#                        Podpis pod rekomendacją #}
+        {#                        {{ content.group_szczegoly.group_sp_o_studiach.field_podpis_pod_rekomendacja }} #}
+        {#                        Partnerzy #}
+        {#                        {{ content.group_szczegoly.group_sp_o_studiach.field_loga_partnerow }} #}
+
+        {#                    </div> #}
+        {#                </div> #}
+        {#            </div> #}
+
+        {#            <div class="accordion-item"> #}
+        {#                <h2 class="accordion-header mb-0 fs-2" id="headingOrganizacja"> #}
+        {#                    <button class="btn btn-link" type="button" #}
+        {#                            data-toggle="collapse" #}
+        {#                            data-target="#collapseOrganizacja" #}
+        {#                            aria-expanded="true" #}
+        {#                            aria-controls="collapseOrganizacja"> #}
+        {#                        Organizacja studiów podyplomowych #}
+        {#                    </button> #}
+        {#                </h2> #}
+
+        {#                <div id="collapseOrganizacja" class="collapse show" #}
+        {#                     aria-labelledby="headingOrganizacja" #}
+        {#                     data-parent="#accordionSP"> #}
+        {#                    <div class="card-body"> #}
+
+        {#                         <h3 class="fs-4 pt-3 pb-2">Program</h3> #}
+        {#                        (załączniki) #}
+        {#                        {{ content.group_szczegoly.group_sp_organizacja_studiow.field_program_podypl }} #}
+
+        {#                         <h3 class="fs-4 pt-3 pb-2">Plan studiów</h3> #}
+        {#                        (załączniki) #}
+        {#                        {{ content.group_szczegoly.group_sp_organizacja_studiow.field_zalacznik }} #}
+
+        {#                         <h3 class="fs-4 pt-3 pb-2">Kryteria zaliczenia studiów podyplomowych</h3> #}
+        {#                        {{ content.group_szczegoly.group_sp_organizacja_studiow.field_kryteria_zaliczenia_podypl }} #}
+
+        {#                    </div> #}
+        {#                </div> #}
+        {#            </div> #}
+
+        {#            <div class="accordion-item"> #}
+        {#                <h2 class="accordion-header mb-0 fs-2" id="headingAbsolwent"> #}
+
+        {#                    <button class="btn btn-link collapsed" type="button" #}
+        {#                            data-toggle="collapse" #}
+        {#                            data-target="#collapseAbsolwent" #}
+        {#                            aria-expanded="false" #}
+        {#                            aria-controls="collapseAbsolwent"> #}
+        {#                        Sylwetka absolwenta #}
+        {#                    </button> #}
+        {#                </h2> #}
+
+        {#                <div id="collapseAbsolwent" class="collapse" #}
+        {#                     aria-labelledby="headingAbsolwent" #}
+        {#                     data-parent="#accordionSP"> #}
+        {#                    <div class="card-body"> #}
+        {#                        {{ content.group_szczegoly.group_sp_sylwetka_absolwenta.field_sylwetka_absolwenta_podyp }} #}
+        {#                    </div> #}
+        {#                </div> #}
+        {#            </div> #}
+        {#            <!-- aa --> #}
+        {#            <div class="accordion-item"> #}
+        {#                <h2 class="accordion-header mb-0 fs-2" id="headingOplaty"> #}
+
+        {#                    <button class="btn btn-link collapsed" type="button" #}
+        {#                            data-toggle="collapse" #}
+        {#                            data-target="#collapseOplaty" #}
+        {#                            aria-expanded="false" #}
+        {#                            aria-controls="collapseOplaty"> #}
+        {#                        Opłaty #}
+        {#                    </button> #}
+        {#                </h2> #}
+
+        {#                <div id="collapseOplaty" class="collapse" #}
+        {#                     aria-labelledby="headingOplaty" data-parent="#accordionSP"> #}
+        {#                    <div class="card-body"> #}
+        {#                        {{ content.group_szczegoly.group_sp_oplaty.field_oplaty_podypl }} #}
+        {#                        {{ content.group_szczegoly.group_sp_oplaty.field_oplata_za_semestr }} #}
+        {#                    </div> #}
+        {#                </div> #}
+        {#            </div> #}
+        {#            <!-- Rekrutacja --> #}
+        {#            <div class="accordion-item"> #}
+        {#                <h2 class="accordion-header mb-0 fs-2" id="headingRekrutacja"> #}
+
+        {#                    <button class="btn btn-link collapsed" type="button" #}
+        {#                            data-toggle="collapse" #}
+        {#                            data-target="#collapseRekrutacja" #}
+        {#                            aria-expanded="false" #}
+        {#                            aria-controls="collapseRekrutacja"> #}
+        {#                        Rekrutacja #}
+        {#                    </button> #}
+        {#                </h2> #}
+
+        {#                <div id="collapseRekrutacja" class="collapse" #}
+        {#                     aria-labelledby="headingRekrutacja" #}
+        {#                     data-parent="#accordionSP"> #}
+        {#                    <div class="card-body"> #}
+        {#                         <h3 class="fs-4 pt-3 pb-2">Sylwetka kandydata</h3> #}
+        {#                        {{ content.group_szczegoly.group_sp_rekrutacja.field_sylwetka_kandydata_podypl }} #}
+
+        {#                         <h3 class="fs-4 pt-3 pb-2">Zasady naboru</h3> #}
+        {#                        {{ content.group_szczegoly.group_sp_rekrutacja.field_zasady_naboru_podypl }} #}
+
+        {#                         <h3 class="fs-4 pt-3 pb-2">Limit miejsc</h3> #}
+        {#                        {{ content.group_szczegoly.group_sp_rekrutacja.field_limit_miejsc_podypl }} #}
+
+        {#                         <h3 class="fs-4 pt-3 pb-2">Dokumenty rekrutacyjne</h3> #}
+        {#                        {{ content.group_szczegoly.group_sp_rekrutacja.field_dokumenty_rekrutacyjne_pod }} #}
+
+        {#                         <h3 class="fs-4 pt-3 pb-2">Terminy i etapy rekrutacji</h3> #}
+        {#                        {{ content.group_szczegoly.group_sp_rekrutacja.field_terminy_rekrutacji_podypl }} #}
+        {#                    </div> #}
+        {#                </div> #}
+        {#            </div> #}
+        {#            <!-- Kadra --> #}
+        {#            <div class="accordion-item"> #}
+        {#                <h2 class="accordion-header mb-0 fs-2" id="headingKadra"> #}
+
+        {#                    <button class="btn btn-link collapsed" type="button" #}
+        {#                            data-toggle="collapse" #}
+        {#                            data-target="#collapseKadra" #}
+        {#                            aria-expanded="false" #}
+        {#                            aria-controls="collapseKadra"> #}
+        {#                        Kadra #}
+        {#                    </button> #}
+        {#                </h2> #}
+
+        {#                <div id="collapseKadra" class="collapse" #}
+        {#                     aria-labelledby="headingKadra" data-parent="#accordionSP"> #}
+        {#                    <div class="card-body"> #}
+        {#                         <h3 class="fs-4 pt-3 pb-2">Kierownik studiów podyplomowych</h3> #}
+        {#                        {{ content.group_szczegoly.group_sp_kadra.field_kierownik_sp }} #}
+        {#                        {{ content.group_szczegoly.group_sp_kadra.field_kierownik_sp_ref }} #}
+        {#                        {{ content.group_szczegoly.group_sp_kadra.field_kierownik }} #}
+        {#                        {{ content.group_szczegoly.group_sp_kadra.field_wykladowcy_z_ug }} #}
+        {#                        {{ content.group_szczegoly.group_sp_kadra.field_pracownik }} #}
+        {#                        {{ content.group_szczegoly.group_sp_kadra.field_wykladowcy_spoza_ug }} #}
+
+
+        {#                        <div class="row g-5 mx-auto col-12 col-lg-10 text-center text-lg-start pb-5 mt-5 border-bottom"> #}
+        {#                            <div class="col-lg-3 text-center"><img #}
+        {#                                        alt="Janina Kowalska" #}
+        {#                                        class="img-fluid rounded-circle thumbnail" #}
+        {#                                        src="https://historia.ug.edu.pl/sites/historia.ug.edu.pl/files/_nodes/strona/102010/images/pngkey.com-placeholder-png-3499617.png" #}
+        {#                                        style="max-height: 150px"/> #}
+        {#                            </div> #}
+        {#                            <div class="col-lg-9 text-center text-lg-start"> #}
+        {#                                <h3 class="h4 mb-3 mx-auto mx-lg-0"><a #}
+        {#                                            class="text-decoration-none lh-1" #}
+        {#                                            href="https://ug.edu.pl/o_uczelni/wladze/prorektor_ds_wspolpracy_miedzynarodowej">dr #}
+        {#                                        hab. Janina Kowalska, prof UG</a> #}
+        {#                                </h3> #}
+        {#                                <p> Tekst o osobie</p> #}
+        {#                            </div> #}
+        {#                        </div> #}
+
+
+        {#                         <h3 class="fs-4 pt-3 pb-2">Wykładowcy</h3> #}
+        {#                        <div class="row g-5 mx-auto col-12 col-lg-10 text-center text-lg-start pb-5 mt-5 border-bottom"> #}
+        {#                            <div class="col-lg-3 text-center"><img #}
+        {#                                        alt="Janina Kowalska" #}
+        {#                                        class="img-fluid rounded-circle thumbnail" #}
+        {#                                        src="https://historia.ug.edu.pl/sites/historia.ug.edu.pl/files/_nodes/strona/102010/images/pngkey.com-placeholder-png-3499617.png" #}
+        {#                                        style="max-height: 150px"/> #}
+        {#                            </div> #}
+        {#                            <div class="col-lg-9 text-center text-lg-start"> #}
+        {#                                <h3 class="h4 mb-3 mx-auto mx-lg-0"><a #}
+        {#                                            class="text-decoration-none lh-1" #}
+        {#                                            href="https://ug.edu.pl/o_uczelni/wladze/prorektor_ds_wspolpracy_miedzynarodowej">dr #}
+        {#                                        hab. Janina Kowalska, prof UG</a> #}
+        {#                                </h3> #}
+        {#                                <p> Tekst o osobie</p> #}
+        {#                            </div> #}
+        {#                        </div> #}
+
+        {#                        <div class="row g-5 mx-auto col-12 col-lg-10 text-center text-lg-start pb-5 mt-5 border-bottom"> #}
+        {#                            <div class="col-lg-3 text-center"><img #}
+        {#                                        alt="Janina Kowalska" #}
+        {#                                        class="img-fluid rounded-circle thumbnail" #}
+        {#                                        src="https://historia.ug.edu.pl/sites/historia.ug.edu.pl/files/_nodes/strona/102010/images/pngkey.com-placeholder-png-3499617.png" #}
+        {#                                        style="max-height: 150px"/> #}
+        {#                            </div> #}
+        {#                            <div class="col-lg-9 text-center text-lg-start"> #}
+        {#                                <h3 class="h4 mb-3 mx-auto mx-lg-0"><a #}
+        {#                                            class="text-decoration-none lh-1" #}
+        {#                                            href="https://ug.edu.pl/o_uczelni/wladze/prorektor_ds_wspolpracy_miedzynarodowej">dr #}
+        {#                                        hab. Janina Kowalska, prof UG</a> #}
+        {#                                </h3> #}
+        {#                                <p> Tekst o osobie</p> #}
+        {#                            </div> #}
+        {#                        </div> #}
+
+        {#                        <div class="row g-5 mx-auto col-12 col-lg-10 text-center text-lg-start pb-5 mt-5 border-bottom"> #}
+        {#                            <div class="col-lg-3 text-center"><img #}
+        {#                                        alt="Janina Kowalska" #}
+        {#                                        class="img-fluid rounded-circle thumbnail" #}
+        {#                                        src="https://historia.ug.edu.pl/sites/historia.ug.edu.pl/files/_nodes/strona/102010/images/pngkey.com-placeholder-png-3499617.png" #}
+        {#                                        style="max-height: 150px"/> #}
+        {#                            </div> #}
+        {#                            <div class="col-lg-9 text-center text-lg-start"> #}
+        {#                                <h3 class="h4 mb-3 mx-auto mx-lg-0"><a #}
+        {#                                            class="text-decoration-none lh-1" #}
+        {#                                            href="https://ug.edu.pl/o_uczelni/wladze/prorektor_ds_wspolpracy_miedzynarodowej">dr #}
+        {#                                        hab. Janina Kowalska, prof UG</a> #}
+        {#                                </h3> #}
+        {#                                <p> Tekst o osobie</p> #}
+        {#                            </div> #}
+        {#                        </div> #}
+
+        {#                    </div> #}
+        {#                </div> #}
+        {#            </div> #}
+        {#            <!-- Kontakt --> #}
+        {#            <div class="accordion-item"> #}
+        {#                <h2 class="accordion-header mb-0 fs-2" id="headingKontakt"> #}
+
+        {#                    <button class="btn btn-link collapsed" type="button" #}
+        {#                            data-toggle="collapse" #}
+        {#                            data-target="#collapseKontakt" #}
+        {#                            aria-expanded="false" #}
+        {#                            aria-controls="collapseKontakt"> #}
+        {#                        Kontakt #}
+        {#                    </button> #}
+        {#                </h2> #}
+
+        {#                <div id="collapseKontakt" class="collapse" #}
+        {#                     aria-labelledby="headingKontakt" #}
+        {#                     data-parent="#accordionSP"> #}
+        {#                    <div class="card-body"> #}
+        {#                         <h3 class="fs-4 pt-3 pb-2">Wydział</h3> #}
+        {#                        {{ content.group_szczegoly.group_sp_dane_kontaktowe.field_wydzial_aktualny }} #}
+
+
+        {#                         <h3 class="fs-4 pt-3 pb-2">Kontakt</h3> #}
+        {#                        {{ content.group_szczegoly.group_sp_dane_kontaktowe.field_kontakt_podypl }} #}
+        {#                        <h4 class="text-mute sr-only">Kontakt z biurem</h4> #}
+        {#                        <br/> #}
+        {#                        #}{#                tel. <a href="tel:+48581234567">+48 58 123 45 67</a><br /> #}
+        {#                        tel. {{ content.group_szczegoly.group_sp_dane_kontaktowe.field_telefon }} #}
+        {#                        #}{#                fax <a href="tel:+48581234567">+48 58 123 45 67</a><br /> #}
+        {#                        fax: {{ content.group_szczegoly.group_sp_dane_kontaktowe.field_fax }} #}
+        {#                        e-mail: {{ content.group_szczegoly.group_sp_dane_kontaktowe.field_adres_e_mail }} #}
+        {#                        <br/> #}
+        {#                        #}{#                e-mail: <a href="mailto:test@test.org">test@test.org</a><br /> #}
+        {#                        <h4 class="text-mute sr-only">Mapa + adres</h4> #}
+        {#                        {{ content.group_szczegoly.group_sp_dane_kontaktowe.field_mapa_adres }} #}
+        {#                    </div> #}
+        {#                </div> #}
+        {#            </div> #}
+        {#        </div> #}
+
+
+    </div>
+</article>

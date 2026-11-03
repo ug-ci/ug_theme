@@ -1,0 +1,29 @@
+{#
+/**
+ * @file
+ EN: SZKOŁY DOKTORSKIE - EN Ekonomia - OPŁATY
+ PL: SZKOŁY DOKTORSKIE - Ekonomia - zasady rekrutacji
+
+ * @see template_preprocess_taxonomy_term()
+ *
+ * Kopia z:
+ - bootstrap_barrio/templates/content/taxonomy-term.html.twig
+ - ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig
+ *
+ */
+#}
+{% set classes = [
+    'taxonomy-term',
+    'vocabulary-' ~ term.bundle|clean_class,
+] %}
+{% extends "@ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig" %}
+
+{% block blockbefore %}
+    {% if language == 'en' %}
+        {# wersja EN: Szkoła doktorska - EN Ekonomia  - opłaty #}
+        {{ include('@ug_theme/includes/sd_details.html.twig',  {nid: '107339', mode: 'oplaty'}  ) }}
+    {% elseif language == 'en' %}
+        {# wersja PL: Szkoła doktorska Ekonomia - zasady rekrutacji#}
+        {{ drupal_entity('node', '123693', 'szkoly_doktorskie_zasady_rekrutacji') }}
+    {% endif %}
+{% endblock %}

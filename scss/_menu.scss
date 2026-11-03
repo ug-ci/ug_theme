@@ -1,0 +1,137 @@
+ul.sf-menu.sf-style-white li,
+ul.sf-menu.sf-style-white.sf-navbar,
+#superfish-menu-glowne-accordion,
+div.sf-accordion-toggle.sf-style-white a.sf-expanded,
+ul.sf-menu.sf-style-white.sf-accordion li.sf-expanded,
+div.sf-accordion-toggle.sf-style-white a {
+  @media #{$phone} {
+
+    background-color: #052d73 !important;
+
+    &:hover {
+      background-color: #052d73 !important;
+    }
+  }
+}
+
+#superfish-menu-glowne ul.sf-menu.sf-style-white li,
+#superfish-menu-glowne ul.sf-menu.sf-style-white.sf-navbar {
+  @media #{$desktop} {
+    background-color: transparent !important;
+
+    &:hover {
+      background-color: transparent !important;
+    }
+  }
+}
+
+///////////////////////////////////////////////////////////
+
+.block-superfishmenu-glowne {
+  left: 0px !important;
+}
+
+
+
+
+.sf-accordion .sf-depth-1.menuparent {
+  @media #{$phone} {
+    font-size: 16px;
+  }
+
+  .undefined-accordion {
+    @media #{$phone} {
+      display: none !important;
+    }
+  }
+}
+
+#superfish-menu-glowne {
+
+  li.sf-depth-2 a,
+  .sf-depth-2 {
+    font-size: 14px !important;
+
+    &:hover {
+      color: $dark-blue !important;
+    }
+  }
+}
+
+.techniczne {
+  z-index: 1000;
+
+  .col {
+    min-height: 25px;
+
+    @media #{$phone} {
+      min-height: 15px;
+    }
+
+    a:hover {
+      color: $pure-white !important;
+      text-decoration: none !important;
+    }
+  }
+
+  .border-end {
+    border-right: 1px solid #436280 !important;
+  }
+}
+
+#block-ug-theme-ikonytechniczne {
+  z-index: 1000;
+  min-width: 300px !important;
+}
+
+.navbar-light .navbar-toggler {
+  display: none;
+}
+
+#icons-en,
+.icons {
+  display: none;
+}
+
+.ug_navbar .container {
+  height: 100%;
+}
+
+.m-reset {
+  margin: 0;
+  padding: 0;
+}
+
+.pos-rel {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media screen and (min-width: 576px) {
+  .offset-sm-1 {
+    margin-left: 0 !important;
+  }
+}
+
+@media screen and (min-width: 993px) {
+  .icons {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  #icons-en {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1150px) {
+  #icons-en {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .offset-xl-3 {
+    margin-left: 0 !important;
+  }
+}

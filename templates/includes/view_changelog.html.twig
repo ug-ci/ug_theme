@@ -1,0 +1,49 @@
+{# do używania w stopce #}
+
+  {% if display_submitted %}
+      <div class="pt-2">
+          <a class="toggle_record-link">
+              <div class="toggle_record">
+                  <div class="toggle_record-box">
+                      <div class="toggle_record-box-one toggle_record-box-line"></div>
+                      <div class="toggle_record-box-two toggle_record-box-line"></div>
+                  </div>
+                  <span class="toggle_record-text">{{ 'View changelog' | trans }}</span>
+                  {#                    <span style="display:none">{{ 'View changelog'| trans }}</span> #}
+              </div>
+          </a>
+          <div class="node__meta toggle_record-description">
+              <hr/>
+              {% block submitted %}
+                  {% set createdDate = node.getCreatedTime|format_date('date_long_pl') %}
+                  {% set changedDate = node.getChangedTime|format_date('date_long_pl') %}
+                  {% set author = node.Owner %}
+                  {% set rev_author = node.getRevisionUser %}
+
+                  {% set author_field_imie = '@label'|t({'@label': 'Importer'}) %}
+                  {% set author_field_nazwisko = '@label'|t({'@label': 'Automatyczny'}) %}
+
+                  {% if author.field_imie.value and author.field_nazwisko.value %}
+                      {% set author_field_imie = author.field_imie.value %}
+                      {% set author_field_nazwisko = author.field_nazwisko.value %}
+                  {% endif %}
+
+                  {% set rev_author_field_imie = '@label'|t({'@label': 'Importer'}) %}
+                  {% set rev_author_field_nazwisko = '@label'|t({'@label': 'Automatyczny'}) %}
+
+                  {% if rev_author.field_imie.value and rev_author.field_nazwisko.value %}
+                      {% set rev_author_field_imie = rev_author.field_imie.value %}
+                      {% set rev_author_field_nazwisko = rev_author.field_nazwisko.value %}
+                  {% endif %}
+
+                  <span{{ author_attributes }}>
+          {% trans %}Submitted on {{ createdDate }} by {{ author_field_imie }} {{ author_field_nazwisko }} {% endtrans %}
+        </span>
+                  <span{{ author_attributes }}>
+          {% trans %}Changed on {{ changedDate }} by {{ rev_author_field_imie }} {{ rev_author_field_nazwisko }}{% endtrans %}
+        </span>
+              {% endblock %}
+              {{ metadata }}
+          </div>
+      </div>
+  {% endif %}

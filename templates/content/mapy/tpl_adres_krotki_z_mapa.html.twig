@@ -1,0 +1,62 @@
+{#
+/**
+    * @file
+    * Default theme implementation for displaying a short address with a map.
+    * dodatkowo z opcją zwijania mapy
+    *
+    * Available variables:
+    * - adres: pole typu `address`
+    * - pokoj = nr pokoju
+    * - tel_mail - paragraph z polami telefon i email
+    * - budynek_id - id budynku (nid) (na jego postawie wyświetlana mapa)
+    * - id_map = dodatkowy identyfikator gwarantujący unikalność mapy
+    * - collapse - if set to 1, the map will be collapsed by default
+    //* - mapa: The map.
+    *
+    * @see template_preprocess_adres_krotki_z_mapa()
+    */
+#}
+
+
+{#
+np.
+ul. Wita Stwosza 55[, pok. 123]
+80-308 Gdańsk
+[phone] +48132456789
+[mail] komisja1@ug.edu.pl
+[mapa]
+#}
+
+<div class="row">
+    <div class="col-md-8">
+        {% if adres %}
+            <div class="mb-2">
+                {{ adres.address_line1 }}{% if pokoj %}, {{ 'room' | t}}&nbsp;{{ pokoj }}{% endif %}
+                <br/>
+                {{ adres.postal_code }} {{ adres.locality }}
+            </div>
+        {% endif %}
+        {% if tel_mail %}
+            {% include '@ug_theme/content/mapy/tpl_tel_email.html.twig' with  {'tel_mail': tel_mail} %}
+        {% endif %}
+    </div>
+    {# mapa #}
+    {% if budynek_id and collapse %}
+        <div class="col-md-4">
+            <button class="btn btn-frame" data-bs-toggle="collapse" data-bs-target="#mapContainer_{{ budynek_id }}{% if id_map %}_{{ id_map }}{% endif %}">
+                {{  'Map' | t }}
+            </button>
+        </div>
+    {% endif %}
+</div>
+{% if budynek_id %}
+    <div class="row">
+        <div class="{% if collapse %}collapse{% endif%} mt-3" id="mapContainer_{{ budynek_id }}{% if id_map %}_{{ id_map }}{% endif %}">
+            <div class="card card-body">
+                <div id="mapCollapse" style="height: 400px;">
+                    {{ drupal_view('mapa_budynki', 'block_mapa_budynku_solo', budynek_id ) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

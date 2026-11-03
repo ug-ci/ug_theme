@@ -1,0 +1,459 @@
+{#
+/**
+ * @file
+ * Bootstrap Barrio's theme implementation to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+     Only "getter" methods (method names starting with "get", "has", or "is")
+     and a few common methods such as "id" and "label" are available. Calling
+     other methods (such as node.delete) will result in an exception.
+ * - label: The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: Themed creation date field.
+ * - author_name: Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_node()
+ */
+#}
+{{ attach_library('bootstrap_barrio/node') }}
+
+<article>
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-12 pb-1">
+{#                {% if label %}#}
+{#                {{ title_prefix }}#}
+{#                {% if label and not page %}#}
+
+{#                <h1 {{ title_attributes.addClass('node__title') }}>{{ node.field_budynek.value }} - {{ label }}</h1>#}
+                <p {{ title_attributes.addClass('node__title').addClass('h3') }}>{{ label }}</p>
+                <p class="h6">{{ node.field_budynek.entity.title['0'].value }}</p>
+
+{#                    <h2{{ title_attributes.addClass('node__title') }}>#}
+{#                        <a href="{{ url }}" rel="bookmark">{{ label }}</a>#}
+{#                    </h2>#}
+{#                {% endif %}#}
+{#                {{ title_suffix }}#}
+
+
+            </div>
+
+
+
+            <div class="col-lg-6 order-2 mt-md-3 mt-0 order-lg-1 ">
+                {{ content.body }}
+                <div class="row my-4">
+                    <div class="container">
+
+                        <ul class="list-unstyled d-flex flex-column flex-wrap align-content-start columns">
+                            {% if node.field_powierzchnia.value %}<li><span class="material-icons me-2 fs-6 text-primary">fullscreen</span>Powierzchnia: {{ node.field_powierzchnia.value }}&nbsp;m<sup class="small">2</sup></li>{% endif %}
+                            {% if node.field_max_liczba_miejsc.value %}<li><span class="material-icons me-2 fs-6 text-primary">group</span>Max. liczba miejsc: {{ node.field_max_liczba_miejsc.value }}</li>{% endif %}
+                            {% if node.field_liczba_komputerow.value %}<li><span class="material-icons me-2 fs-6 text-primary">computer</span>
+                                Komputery:
+
+{#                                {{ node.field_liczba_komputerow.value }}#}
+                                {# TODO pole wielokrotne (separator ',') #}
+
+                                {% if node.field_liczba_komputerow|length > 1 %}
+                                    <ul>
+                                        {%  for key,item in node.field_liczba_komputerow %}
+                                            {% if loop.last %}
+                                                {% set separator = '' %}
+                                            {% else %}
+                                                {% set separator = '; ' %}
+                                            {% endif %}
+                                            <li>{{ item.value }}{{ separator }}</li>
+                                        {%  endfor %}
+                                    </ul>
+                                {%  else %}
+                                    {{  node.field_liczba_komputerow.value |join('; ') }}
+                                {% endif %}
+
+
+                                </li> {% endif %}
+{#                        field_wyposazenie#}
+                            {% for wyposazenie in node.field_wyposazenie %}
+                            <li>
+                                <span class="material-icons me-2 fs-6 text-primary">{{ wyposazenie.entity.field_ikonka.value['0'].icon }}</span>
+                                {{ wyposazenie.entity.name.value }}</li>
+                            {%  endfor %}
+                        </ul>
+                    </div>
+                </div>
+                {% if node.field_cena_wynajmu.value  %}
+                    <div class="h4"> <span class="h5">Cena wynajmu:</span>
+                    <span class="h5">
+                    {% if node.field_cena_wynajmu|length > 1 %}
+                        <ul>
+                        {%  for key,item in node.field_cena_wynajmu %}
+                            {% if loop.last %}
+                                {% set separator = '' %}
+                            {% else %}
+                                {% set separator = '; ' %}
+        {#                        TODO: czy tu moze być html? #}
+                            {% endif %}
+                            <li>{{ item.value }}{{ separator }}</li>
+                        {%  endfor %}
+                    </ul>
+                    {%  else %}
+                        {{  node.field_cena_wynajmu.value |join('; ') }}
+                    {% endif %}
+                    </span>
+                </div>
+            {%  endif %}
+            {# TODO formatowanie tekstu gdy to jest UL #}
+            </div>
+
+
+            <div class="col-lg-6 order-1 order-lg-2 ">
+
+{#                <img src="https://ekonom.new.ug.edu.pl/sites/ekonom.ug.edu.pl/files/2023-05/placeholder.png" class="img-fluid mb-4 mb-md-0" />#}
+{#                <img src="{{ node.field_wynajmy_zdjecie['0'].entity.uri.value | image_style('700x500') }}" class="img-fluid" />#}
+                <img src="{{ node.field_wynajmy_zdjecie['0'].entity.uri.value | image_style('1024x640') }}" class="img-fluid" />
+
+{#                <img src="https://ekonom.new.ug.edu.pl/sites/ekonom.ug.edu.pl/files/2023-05/placeholder.png" class="img-fluid mb-4 mb-md-0" />#}
+            </div>
+        </div>
+{#            informacje dla kontrahentów #}
+        <div class="row g-4 pt-4">
+            <div class="col-md-6">
+                <img src="{{ node.field_informacje_kontrah_photo['0'].entity.uri.value | image_style('1024x640') }}" class="img-fluid" />
+            </div>
+            <div class="col-md-6 justify-content-center">
+
+{#                {{  node.field_informacje_dla_kontrahenta.value }}#}
+                {{ drupal_field('field_informacje_dla_kontrahenta', 'node', node.id, 'full' ) }}
+
+
+                <div class="row g-4 mt-4 ">
+
+{#                    <div class="mt-4 col-md-12">#}
+{#                        <button type="button" class="btn btn-frame">Button box</button>#}
+{#                    </div>#}
+
+
+                    {% if node.field_pomieszczenie_szczegoly | length > 0 %}
+                    <div class="col-md-6 ">
+{#                        {% for file in node.field_pomieszczenie_szczegoly %}#}
+{#                            {{ file.entity.field_media_file.description }}#}
+{#                        {% endfor %}#}
+
+
+                        <a href="{{ node.field_pomieszczenie_szczegoly['0'].value.uri }}" class="btn btn-frame m-0">{{ node.field_pomieszczenie_szczegoly['0'].value.description | default('Szczegóły') }}</a>
+                    </div>
+                    {% endif %}
+
+                    {% if node.field_wniosek_o_wynajem | length > 0 %}
+                    <div class="col-md-6">
+                        <a href="{{ node.field_wniosek_o_wynajem['0'].value.uri }}" class="btn btn-frame m-0">{{ node.field_wniosek_o_wynajem['0'].value.title }}</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {% if node.field_galeria_zdjec | length > 0 %}
+        <div class="row my-5 g-4">
+            <div class="col-12">
+                <h2>Galeria</h2>
+            </div>
+
+{#            TODO podpisy w colorbox #}
+
+{#            <h2>responsive?</h2>#}
+{#            {% for key, item in node.field_galeria_zdjec %}#}
+{##}
+{#field_galeria_zdjec:#}
+{#    weight: 115#}
+{#    label: hidden#}
+{#    settings:#}
+{#      colorbox_node_style: zdjecie_230x230#}
+{#      colorbox_node_style_first: ''#}
+{#      colorbox_image_style: 1024x640#}
+{#      colorbox_gallery: post#}
+{#      colorbox_gallery_custom: ''#}
+{#      colorbox_caption: alt#}
+{#      colorbox_caption_custom: ''#}
+{#    third_party_settings: {  }#}
+{#    type: colorbox#}
+{#    region: content#}
+{##}
+
+{#                {% set imagestyle = {#}
+{#                    '#theme':      'colorbox_formatter',#}
+{#                    '#settings': {#}
+{#                        colorbox_node_style: 'zdjecie_230x230',#}
+{#                        colorbox_image_style: '1024x640',#}
+{#                        colorbox_caption: 'alt',#}
+{#                        type: 'colorbox'#}
+{#                    },#}
+{#                    '#style_name': 'zdjecie_230x230',#}
+{#                    '#uri':        node.field_galeria_zdjec[key].entity.uri.value,#}
+{#                    '#alt':        node.field_galeria_zdjec[key].alt,#}
+{#                    '#attributes': { class: 'img-fluid' },#}
+{#                } %}#}
+{#                {% set imagestyle = #}{#}#}
+{#                    '#theme':      'image_style',#}
+{#                    '#style_name': 'zdjecie_230x230',#}
+{#                    '#uri':        node.field_galeria_zdjec[key].entity.uri.value,#}
+{#                    '#alt':        node.field_galeria_zdjec[key].alt,#}
+{#                    '#attributes': { class: 'img-fluid' },#}
+{#                } %}#}
+{#                <div class="col-md-3 col-6">#}
+{#                    {{ imagestyle }}#}
+{#                </div>#}
+{#            {% endfor %}#}
+
+{#            <h2>galeria z użyciem twig_tweak</h2>#}
+
+{#            {{ drupal_field('field_galeria_zdjec', 'node', 1, {type: 'image_url', settings: {image_style: 'large'}}) }}#}
+
+
+{#            <h2>próba ręcznego zbudowania</h2>#}
+
+            {% for key, item in node.field_galeria_zdjec %}
+
+
+{#                            {{ node.field_galeria_zdjec[key].entity.uri.value | image_style('zdjecie_230x230') }}#}
+                {% set img_title = node.field_galeria_zdjec[key].entity.alt.value %}
+            <div class="col-md-3 col-6">
+                <a href="{{ node.field_galeria_zdjec[key].entity.uri.value | image_style('1024x640') }}"
+                   title="{{ img_title }}"
+                   class="colorbox cboxElement"
+                   data-colorbox-gallery="gallery-news-{{ node.id }}-field_galeria_zdjec-n_EnmQaXIno"
+                   data-cbox-img-attrs="{&quot;alt&quot;:&quot;{{ img_title }}&quot;}">
+
+                <img src="{{ node.field_galeria_zdjec[key].entity.uri.value | image_style('zdjecie_230x230') }}" class="img-fluid"
+                     alt="{{ img_title }}" loading="lazy" typeof="foaf:Image" class="image-style-medium"
+                />
+                </a>
+            </div>
+
+{#            <a href="https://biology.ug.edu.pl/sites/biology.ug.edu.pl/files/_nodes/news/109215/images/dr-aleksandra-kocot-i-dr-#}
+{#            hab-magdalena-plotka-prof-ug2.jpg" title="Autorki publikacji od prawej z Katedry Mikrobiologii#}
+{#            – dr Aleksandra Kocot (post doc) oraz dr hab. Magdalena Płotka prof. UG (kierownik projektu OPUS20)"#}
+{#               data-colorbox-gallery="gallery-news-109215-field_zdjecia-n_EnmQaXIno"#}
+{#               class="colorbox cboxElement"#}
+{#               data-cbox-img-attrs="{&quot;alt&quot;:&quot;Autorki publikacji od prawej z Katedry Mikrobiologii –#}
+{#               dr Aleksandra Kocot (post doc) oraz dr hab. Magdalena Płotka prof. UG (kierownik projektu OPUS20)&quot;}">#}
+{#                <img src="/sites/biology.ug.edu.pl/files/styles/medium/public/_nodes/news/109215/images/dr-aleksandra-kocot-#}
+{#                i-dr-hab-magdalena-plotka-prof-ug2.jpg.webp?itok=Wg8SzAQi" width="165" height="220"#}
+{#                     alt="Autorki publikacji od prawej z Katedry Mikrobiologii – dr Aleksandra Kocot (post doc) oraz#}
+{#                     dr hab. Magdalena Płotka prof. UG (kierownik projektu OPUS20)"#}
+{#                     loading="lazy" typeof="foaf:Image" class="image-style-medium">#}
+{#            </a>#}
+            {% endfor %}
+
+
+
+            {#<h2> z użyciem twig_tweak</h2>#}
+{#                {{ drupal_field('field_galeria_zdjec', 'node', node.id, 'full' ) }}#}
+{# wywala błąd#}
+{#{{ drupal_field('field_galeria_zdjec', 'node', node.id, 'full', {'attributes': { class: 'img-fluid col-md-3 col-6"' }}) }}#}
+
+
+
+
+
+{# z configa:
+field_galeria_zdjec:
+    weight: 115
+    label: hidden
+    settings:
+      colorbox_node_style: ''
+      colorbox_node_style_first: ''
+      colorbox_image_style: ''
+      colorbox_gallery: post
+      colorbox_gallery_custom: ''
+      colorbox_caption: auto
+      colorbox_caption_custom: ''
+    third_party_settings: {  }
+    type: colorbox
+    region: content
+
+#}
+
+
+{#            <h2>node.field_galeria_zdjec</h2>#}
+{#            {{ node.field_galeria_zdjec }}#}
+
+{#            <h2>content.field_galeria_zdjec</h2>#}
+{#            {{ content.field_galeria_zdjec | colorbox_gallery }}#}
+
+
+
+{#            {{ node.field_galeria_zdjec }}#}
+{#            {{ node.field_galeria_zdjec.value }}#}
+
+{#             pole: field_galeria_zdjec #}
+{#            <h2>galeria z użyciem zwykłego for</h2>#}
+{#            {% for key, item in node.field_galeria_zdjec %}#}
+
+
+{#                {{ node.field_galeria_zdjec[key].entity.uri.value | image_style('zdjecie_230x230') }}#}
+{#                <div class="col-md-3 col-6">#}
+{#                    <img src="{{ node.field_galeria_zdjec[key].entity.uri.value | image_style('zdjecie_230x230') }}" class="img-fluid" />#}
+{#                </div>#}
+
+                {#            {% for zdjecie in .value %}#}
+{#                {{  kint(zdjecie) }}#}
+
+{#                {{ node.field_slides[key].entity.uri.value | image_style('thumbnail') }}#}
+{#            {% endfor %}#}
+{#            {% endfor %}#}
+
+{#            <div class="col-md-3 col-6">#}
+{#                <img src="https://placehold.co/400x400" class="img-fluid" />#}
+{#            </div>#}
+{#            <div class="col-md-3 col-6">#}
+{#                <img src="https://placehold.co/400x400" class="img-fluid" />#}
+{#            </div>#}
+{#            <div class="col-md-3 col-6">#}
+{#                <img src="https://placehold.co/400x400" class="img-fluid" />#}
+{#            </div>#}
+{#            <div class="col-md-3 col-6">#}
+{#                <img src="https://placehold.co/400x400" class="img-fluid" />#}
+{#            </div>#}
+        </div>
+        {% endif %}
+    </div>
+
+
+{# przypisanie do budynku: {{   node.field_budynek.value['0'].target_id }}#}
+    {{ drupal_contextual_links('entity.view.edit_form:view=wynajmy_kontakt_do_budynku&display_id=block_kontakt') }}
+
+    {{  drupal_view('wynajmy_kontakt_do_budynku', 'block_kontakt', node.field_budynek.value['0'].target_id ) }}
+<hr />
+    {{  drupal_view('wynajmy_kontakt_do_budynku', 'block_mapka', node.field_budynek.value['0'].target_id ) }}
+</article>
+
+
+{# ORYGINALNE #}
+
+{#
+
+
+
+
+
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'clearfix',
+  ]
+%}
+<article{{ attributes.addClass(classes) }}>
+  <header>
+    {{ title_prefix }}
+    {% if label and not page %}
+      <h2{{ title_attributes.addClass('node__title') }}>
+        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+      </h2>
+    {% endif %}
+    {{ title_suffix }}
+
+  </header>
+  <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
+	{% if node.field_schowaj_galerie.value == 1 %}
+		{{ content|without('field_zdjecia')|without('field_zdjecie') }}
+	{% else %}
+		{{ content }}
+	{% endif %}
+  </div>
+  {% if display_submitted %}
+  <a class="toggle_record-link">
+				<div class="toggle_record">
+					<div class="toggle_record-box">
+						<div class="toggle_record-box-one toggle_record-box-line"></div>
+						<div class="toggle_record-box-two toggle_record-box-line"></div>
+					</div>
+					<span class="toggle_record-text">Pokaż rejestr zmian</span>
+				</div>
+	</a>
+    <div class="node__meta toggle_record-description">
+    <hr/>
+      {% block submitted %}
+        {% set createdDate = node.getCreatedTime|format_date('long') %}
+        {% set changedDate = node.getChangedTime|format_date('long') %}
+        {% set author = node.Owner %}
+        {% set rev_author = node.getRevisionUser %}
+        
+	{% set author_field_imie = '@label'|t({'@label': 'Importer'}) %}
+        {% set author_field_nazwisko = '@label'|t({'@label': 'Automatyczny'}) %}
+
+        {% if author.field_imie.value and author.field_nazwisko.value %}
+	    {% set author_field_imie = author.field_imie.value %}
+    	    {% set author_field_nazwisko = author.field_nazwisko.value %}
+        {% endif %}
+
+	{% set rev_author_field_imie = '@label'|t({'@label': 'Importer'}) %}
+        {% set rev_author_field_nazwisko = '@label'|t({'@label': 'Automatyczny'}) %}
+
+        {% if rev_author.field_imie.value and rev_author.field_nazwisko.value %}
+	    {% set rev_author_field_imie = rev_author.field_imie.value %}
+    	    {% set rev_author_field_nazwisko = rev_author.field_nazwisko.value %}
+        {% endif %}
+
+        <span{{ author_attributes }}>
+          {% trans %}Submitted on {{ createdDate }} by {{ author_field_imie }} {{ author_field_nazwisko }} {% endtrans %}
+        </span>
+        <span{{ author_attributes }}>
+          {% trans %}Changed on {{ changedDate }} by {{ rev_author_field_imie }} {{ rev_author_field_nazwisko }}{% endtrans %}
+        </span>
+      {% endblock %}
+      {{ metadata }}
+    </div>
+  {% endif %}
+</article>
+
+
+#}

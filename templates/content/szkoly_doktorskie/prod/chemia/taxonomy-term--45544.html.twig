@@ -1,0 +1,37 @@
+{#
+/**
+ * @file
+ SZKOŁY DOKTORSKIE - Chemia - KONTAKT
+ * @see template_preprocess_taxonomy_term()
+ *
+ * Kopia z:
+ - bootstrap_barrio/templates/content/taxonomy-term.html.twig
+ - ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig
+ *
+ */
+#}
+
+{%
+  set classes = [
+  'taxonomy-term',
+  'vocabulary-' ~ term.bundle|clean_class,
+]
+%}
+{#{% set hide_prezentacja = 1 %} #}{# nie pokazuj podpiętych stron #}
+
+
+{% extends "@ug_theme/includes/taxonomy-term--architektura--content-extended.html.twig" %}
+{% block blockbefore %}
+{# SD Biologia - kontakt #}
+<div class="contextual-region">
+
+{{ drupal_entity('node', '123692', 'szkoly_doktorskie_kontakt') }}
+</div>
+
+{#    {% set node = entity('node', 123692) %}#}
+{#    {% set render_array = entity_view(node, 'szkoly_doktorskie_kontakt') %}#}
+{#    <div class="contextual-region">#}
+{#        {{ render_array }}#}
+{#    </div>#}
+
+{% endblock %}

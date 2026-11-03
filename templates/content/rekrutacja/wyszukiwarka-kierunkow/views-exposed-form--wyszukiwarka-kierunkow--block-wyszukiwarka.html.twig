@@ -1,0 +1,51 @@
+{#
+/**
+ * @file
+ * Theme override for a views exposed form.
+ *
+ * Available variables:
+ * - form: A render element representing the form.
+ *
+ * @see template_preprocess_views_exposed_form()
+ */
+#}
+{% if q is not empty %}
+  {#
+    This ensures that, if clean URLs are off, the 'q' is added first,
+    as a hidden form element, so that it shows up first in the POST URL.
+  #}
+{{ q }}
+{% endif %}
+
+
+{#{{ form.field_search.value }}#}
+
+
+{# {% set#}
+{#   form['attributes']['class'] = form['attributes']['class']|merge( ['bg-light', 'p-5'])#}
+{# %}#}
+
+<div class="form-row">
+
+{#  <form action="{{ form.action }}" method="{{ form.method }}"{{ attributes }}>#}
+{#    {{ form.form_build_id }}#}
+{#    {{ form.form_token }}#}
+{#    {{ form.form_id }}#}
+{#    {{ form.field_name }}#}
+{#    <!-- Add other exposed filter fields here -->#}
+{#    <button type="submit">Apply Filters</button>#}
+{#  </form>#}
+
+{#  {% set existing_classes = form['#info']['filter-fstopien']['class']|default([]) %}#}
+{#  {% set combined_classes = existing_classes|merge([ 'ewa-class pt-2']) %}#}
+{#  {% set form = form|merge({'#info': {'filter-fstopien' :{'class': combined_classes}}}) %}#}
+
+  {{ drupal_entity('webform', 'wyszukiwarka_kierunkow') }}
+
+
+{#  {{ kint(form) }}#}
+
+
+
+
+</div>

@@ -1,0 +1,68 @@
+div#sliding-popup,
+div#sliding-popup .eu-cookie-withdraw-banner,
+.eu-cookie-withdraw-tab {
+  background: #f5f5f5;
+}
+
+div#sliding-popup.eu-cookie-withdraw-wrapper {
+  background: transparent;
+}
+
+#sliding-popup h1,
+#sliding-popup h2,
+#sliding-popup h3,
+#sliding-popup p,
+#sliding-popup label,
+#sliding-popup div,
+.eu-cookie-compliance-more-button,
+.eu-cookie-compliance-secondary-button,
+.eu-cookie-withdraw-tab,
+.eu-cookie-compliance-message button
+{
+  color: #000000;
+}
+
+.eu-cookie-withdraw-tab {
+  border-color: #fff;
+}
+
+.disagree-button.eu-cookie-compliance-more-button:focus,
+.eu-cookie-compliance-agree-button:focus,
+.eu-cookie-compliance-default-button:focus,
+.eu-cookie-compliance-hide-button:focus,
+.eu-cookie-compliance-more-button-thank-you:focus,
+.eu-cookie-withdraw-button:focus,
+.eu-cookie-compliance-save-preferences-button:focus {
+  outline: 3px solid #f00;
+}
+
+.sliding-popup-bottom {
+  border-top: 2px solid #cdcdcd;
+}
+
+@media (min-width: 600px) {
+  .eu-cookie-compliance-content {
+    padding-top: 30px;
+  }
+}
+
+.eu-cookie-compliance-default-button,
+.eu-cookie-compliance-save-preferences-button
+{
+  background: #0041d2 !important;
+  color: #fff;
+  border: none;
+  border-radius: 0;
+  text-shadow: none;
+  padding: 14px 25px;
+}
+
+@media screen and (max-width: 600px) {
+  .eu-cookie-compliance-buttons {
+    float: right;
+  }
+  .eu-cookie-compliance-content {
+    padding-top: 6px;
+  }
+}
+

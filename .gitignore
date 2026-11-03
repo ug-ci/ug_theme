@@ -1,0 +1,7 @@
+.vscode/*
+.idea
+.idea/*
+/node_modules/
+/css/style.unfolded.css
+/css/style.prod.2026-04-23.unfolded.css
+/css/style.prod.2026-04-23.css

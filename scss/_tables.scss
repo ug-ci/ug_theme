@@ -1,0 +1,17 @@
+table {
+    border-color: white!important;
+    &.table-striped > tbody > tr td,
+   tbody, td, tfoot, th, thead, tr { border: 0px!important;}
+    thead tr th{
+        background: $primary !important;
+        color: white!important;
+        border: none !important;
+    }
+   tr.even, tr.odd {
+    border-color: silver!important;
+    padding: 10px!important;
+   }
+   &.table-striped > tbody > tr > td.even {
+    background: silver!important;
+   }
+}

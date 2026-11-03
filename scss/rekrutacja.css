@@ -1,0 +1,510 @@
+
+a {
+  text-decoration: none !important;
+}
+
+a:hover {
+  text-decoration: underline !important;
+}
+
+
+.blueline {
+    content:"";
+    display: block;
+    height: 1px;
+    margin: 15px;
+    background: var(--color-UG);
+}
+
+  .top-rekrutacja {
+    padding-left: 32px;
+    margin-bottom: 70px;
+  }
+
+
+/* Rekrutacja */
+
+  .container-rekrutacja {
+    background-color: var(--color-UG);
+    max-width: 860px;
+
+  }
+
+  .rekrutacja-title {
+    font-size: 2rem;
+    color: #fff;
+  }
+
+  div.rekrutacja-title h2 {
+    color: #ffffff !important;
+  }
+
+  .rekrutacja-all {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 25px;
+    padding: 15px;
+    padding: 15px;
+
+  }
+
+  .rekrutacja-all >  a {
+    min-height: 96px;
+    display: grid;
+  }
+
+
+  .rekrutacja-item {
+    padding: 15px;
+    background: #fff;
+    color: var(--color-UG);
+    text-decoration: none;
+    font-family: 'DM sans';
+    font-weight: bold;
+    display: grid;
+    margin: 0px;
+    padding: 15px;
+  font-weight: bold;
+
+  }
+  .rekrutacja-item:hover {
+    padding: 15px;
+    background: #f5f5f5;
+
+  }
+
+  .rekrutacja-item:after {
+      content: "";
+      display: flex;
+
+      background-image: url("/themes/ug_theme/images/arrow-more-right-state.svg");
+      width: 51px;
+      height: 11px;
+      background-repeat: no-repeat;
+      transition: .15s;
+      transition-delay: .28s;
+    position: relative;
+    top: 10px;
+    left: 0;
+
+
+  }
+
+  .rekrutacja-item:hover::after {
+      content: "";
+      display: flex;
+      background-image: url("/themes/ug_theme/images/arrow-more-right-hover.svg");
+      width: 51px;
+      height: 11px;
+      background-repeat: no-repeat;
+      transition: .15s;
+      transition-delay: .28s;
+
+  }
+
+
+
+  @media (max-width: 992px) {
+
+  .rekrutacja-all {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(2, 2fr);
+    grid-gap: 25px;
+
+  }
+  }
+
+  @media (max-width: 425px) {
+
+  .rekrutacja-all {
+    grid-template-columns: 1fr ;
+    grid-template-rows: repeat(2, 2fr);
+
+
+  }
+  }
+
+
+
+  /* podyplomowe */
+
+  .container-spodyplomowe {
+
+    max-width: 860px;
+
+
+  }
+
+.spodyplomowe-title {
+  font-size: 2rem;
+  color: var(--color-UG);
+}
+
+
+.spodyplomowe-item:hover {
+
+    background: var(--hover-UG);
+    color: #fff;
+
+  }
+
+.spodyplomowe-item:hover span{
+
+    background: var(--hover-UG);
+    color: #fff;
+
+  }
+
+
+.spodyplomowe-item span {
+  color: var(--color-UG);
+  text-decoration: none;
+  font-family: 'DM sans';
+  font-weight: bold;
+  padding: 15px;
+  background: #fff;
+  min-height: 90px;;
+
+}
+
+.spodyplomowe-item a:hover {
+    color: #fff;
+
+  }
+
+
+.spodyplomowe-item:after {
+    content: "";
+    display: flex;
+
+    background-image: url("/themes/ug_theme/images/arrow-more-right-state.svg");
+    width: 51px;
+    height: 11px;
+    background-repeat: no-repeat;
+    transition: .15s;
+    transition-delay: .08s;
+  position: relative;
+  top: 10px;
+  left: 0;
+
+
+}
+
+.spodyplomowe-item:hover::after {
+    content: "";
+    display: flex;
+    background-image: url("/themes/ug_theme/images/arrow-more-right-hover.svg");
+    width: 51px;
+    height: 11px;
+    background-repeat: no-repeat;
+    transition: .15s;
+    transition-delay: .08s;
+    filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(62deg) brightness(109%) contrast(101%);
+
+}
+
+
+.spodyplomowe-all {
+  display: grid;
+  grid-template-columns: 1fr 1fr ;
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 25px;
+  padding: 15px;
+
+}
+
+.spodyplomowe-all > a  {
+
+  min-height: 92px;
+  display: grid;
+  border: 2px solid var(--color-UG);
+}
+
+.spodyplomowe-all a:hover {
+    background: var(--hover-UG);
+    color: #fff;
+}
+
+@media (max-width: 992px) {
+
+.spodyplomowe-all  {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(2, 2fr);
+  grid-gap: 25px;
+
+}
+}
+
+@media (max-width: 425px) {
+
+.spodyplomowe-all {
+  grid-template-columns: 1fr ;
+  grid-template-rows: repeat(2, 2fr);
+
+
+}
+}
+
+.spodyplomowe-item {
+  margin: 0px;
+  padding: 15px;
+  font-weight: bold;
+}
+
+
+/* Kursy i Szkolenia */
+
+.container-kursy {
+
+    max-width: 860px;
+
+
+  }
+
+.kursy-title {
+  font-size: 2rem;
+  color: var(--color-UG);
+}
+
+.kursy-item {
+    margin: 0px;
+    padding: 15px;
+    font-weight: bold;
+  }
+
+.kursy-item:hover {
+
+    background: var(--hover-UG);
+    color: #fff;
+
+  }
+
+.kursy-item:hover span{
+
+    background: var(--hover-UG);
+    color: #fff;
+
+  }
+
+
+.kursy-item span {
+  color: var(--color-UG);
+  text-decoration: none;
+  font-family: 'DM sans';
+  font-weight: bold;
+  padding: 15px;
+  background: #fff;
+  min-height: 90px;;
+
+}
+
+.kursy-item a:hover {
+    color: #fff;
+
+  }
+
+
+.kursy-item:after {
+    content: "";
+    display: flex;
+
+    background-image: url("/themes/ug_theme/images/arrow-more-right-state.svg");
+    width: 51px;
+    height: 11px;
+    background-repeat: no-repeat;
+    transition: .15s;
+    transition-delay: .08s;
+  position: relative;
+  top: 10px;
+  left: 0;
+
+
+}
+
+.kursy-item:hover::after {
+    content: "";
+    display: flex;
+    background-image: url("/themes/ug_theme/images/arrow-more-right-hover.svg");
+    width: 51px;
+    height: 11px;
+    background-repeat: no-repeat;
+    transition: .15s;
+    transition-delay: .08s;
+    filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(62deg) brightness(109%) contrast(101%);
+
+}
+
+
+.kursy-all {
+  display: grid;
+  grid-template-columns: 1fr 1fr ;
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 25px;
+  padding: 15px;
+
+}
+
+.kursy-all > a  {
+
+  min-height: 92px;
+  display: grid;
+  border: 2px solid var(--color-UG);
+}
+
+.kursy-all a:hover {
+    background: var(--hover-UG);
+    color: #fff;
+}
+
+@media (max-width: 992px) {
+
+.kursy-all  {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(2, 2fr);
+  grid-gap: 25px;
+
+}
+}
+
+@media (max-width: 425px) {
+
+.kursy-all {
+  grid-template-columns: 1fr ;
+  grid-template-rows: repeat(2, 2fr);
+
+
+}
+}
+
+
+
+
+/* Szkoły doktorskie*/
+
+
+.container-sdoktorskie {
+
+    max-width: 860px;
+
+  }
+
+.sdoktorskie-title {
+  font-size: 2rem;
+  color: var(--color-UG);
+}
+
+.sdoktorskie-item {
+    margin: 0px;
+    padding: 15px;
+    color: #fff;
+    font-weight: bold;
+  }
+
+.sdoktorskie-item:hover {
+
+    background: var(--hover-UG);
+    color: #fff;
+  }
+
+.sdoktorskie-item:hover span{
+
+    background: var(--hover-UG);
+    color: #fff;
+
+  }
+
+
+.sdoktorskie-item span {
+  color: #fff;
+  text-decoration: none;
+  font-family: 'DM sans';
+  font-weight: bold;
+  padding: 15px;
+  background: var(--hover-UG);
+  min-height: 90px;;
+
+}
+
+.sdoktorskie-item a:hover {
+    color: #fff;
+
+  }
+
+
+.sdoktorskie-item:after {
+    content: "";
+    display: flex;
+
+    background-image: url("/themes/ug_theme/images/arrow-more-right-state.svg");
+    width: 51px;
+    height: 11px;
+    background-repeat: no-repeat;
+    transition: .15s;
+    transition-delay: .08s;
+  position: relative;
+  top: 10px;
+  left: 0;
+  filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(62deg) brightness(109%) contrast(101%);
+
+
+}
+
+.sdoktorskie-item:hover::after {
+    content: "";
+    display: flex;
+    background-image: url("/themes/ug_theme/images/arrow-more-right-hover.svg");
+    width: 51px;
+    height: 11px;
+    background-repeat: no-repeat;
+    transition: .15s;
+    transition-delay: .08s;
+    filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(62deg) brightness(109%) contrast(101%);
+
+}
+
+
+.sdoktorskie-all {
+  display: grid;
+  grid-template-columns: 1fr 1fr ;
+  grid-template-rows: repeat(1, 1fr);
+  grid-gap: 25px;
+  padding: 15px;
+
+}
+
+.sdoktorskie-all > a  {
+
+  min-height: 92px;
+  display: grid;
+  background: var(--color-UG);
+  border: 2px solid var(--color-UG);
+}
+
+.sdoktorskie-all a:hover {
+  background: var(--hover-UG);
+  color: #fff;
+}
+
+@media (max-width: 992px) {
+
+.sdoktorskie-all  {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(1, 2fr);
+  grid-gap: 25px;
+
+}
+}
+
+@media (max-width: 425px) {
+  .sdoktorskie-all {
+    grid-template-columns: 1fr ;
+    grid-template-rows: repeat(1, 2fr);
+  }
+}
+
+/*Ramki*/
